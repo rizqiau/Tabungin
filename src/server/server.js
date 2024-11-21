@@ -1,11 +1,12 @@
 import express from "express";
 import routes from "./routes.js";
+import bodyParser from "body-parser";
 
 const app = express()
 const port = 9000
 
-// middleware
-app.use(express.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/', routes)
 
