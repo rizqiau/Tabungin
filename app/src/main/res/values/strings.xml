@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Ones</string>
+    <string name="title_home">Home</string>
+    <string name="title_savings">Saving</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_profile">Profile</string>
+    <string name="add_button_description">Add new item</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
