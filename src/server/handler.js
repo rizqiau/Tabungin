@@ -6,7 +6,6 @@ import bcrypt from "bcrypt";
 
 const usersCollection = collection(db, 'users');
 const savingsCollection = collection(db, 'savings');
-const goalsCollection = collection(db, 'goals');
 
 export const addUser = async (req, res) => {
     try {
@@ -26,14 +25,28 @@ export const addUser = async (req, res) => {
         const passwordHash = await bcrypt.hash(password, 10);
 
         const user = new User(username, email, passwordHash);
-        await addDoc(usersCollection, JSON.parse(JSON.stringify(user)));
+        const userRef = await addDoc(usersCollection, JSON.parse(JSON.stringify(user)));
 
-        res.status(201).send({ message: 'User registered successfully!', data: user });
+        const saving = new Saving(userRef.id, 0);
+        await addDoc(savingsCollection, JSON.parse(JSON.stringify(saving)));
+
+        res.status(201).send({
+            message: 'User registered successfully with a default saving!',
+            data: {
+                user,
+                saving: {
+                    userId: userRef.id,
+                    amount: saving.amount,
+                    createdAt: saving.createdAt,
+                },
+            },
+        });
     } catch (error) {
-        console.error("Error adding user: ", error);
-        res.status(500).send({ error: 'Error adding user!' });
+        console.error("Error adding user and saving: ", error);
+        res.status(500).send({ error: 'Error adding user and saving!' });
     }
 };
+
 
 export const getUsers = async (req, res) => {
     try {
