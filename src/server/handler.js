@@ -106,24 +106,40 @@ export const updateSaving = async (req, res) => {
 
         const existingData = savingDoc.data();
 
+        const updatedAmount = existingData.amount + amount;
         const updatedData = {
-            amount: existingData.amount + amount, 
+            amount: updatedAmount,
             updatedAt: new Date(),
         };
 
         await updateDoc(savingRef, updatedData);
 
+        const goalsCollectionRef = collection(savingRef, "goals");
+        const goalsSnapshot = await getDocs(goalsCollectionRef);
+
+        const batchPromises = goalsSnapshot.docs.map(async (goalDoc) => {
+            const goalData = goalDoc.data();
+            const newStatus = updatedAmount >= goalData.targetAmount ? "completed" : "on-progress";
+
+            if (goalData.status !== newStatus) {
+                const goalRef = doc(goalsCollectionRef, goalDoc.id);
+                await updateDoc(goalRef, { status: newStatus });
+            }
+        });
+
+        await Promise.all(batchPromises);
+
         res.status(200).send({
-            message: 'Saving updated successfully!',
+            message: 'Saving and goals updated successfully!',
             data: {
                 id: savingDoc.id,
                 userId: existingData.userId,
                 ...updatedData,
             },
         });
-    } catch (e) {
-        console.error("Error updating saving: ", e);
-        res.status(500).send({ error: 'Error updating saving!' });
+    } catch (error) {
+        console.error("Error updating saving: ", error);
+        res.status(500).send({ error: 'Error updating saving and goals!' });
     }
 };
 
