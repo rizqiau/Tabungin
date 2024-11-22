@@ -3,6 +3,7 @@ import { doc, addDoc, collection, getDocs, getDoc, updateDoc, deleteDoc, query, 
 import { Saving } from "../models/saving.js";
 import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const usersCollection = collection(db, 'users');
 const savingsCollection = collection(db, 'savings');
@@ -12,26 +13,30 @@ export const addUser = async (req, res) => {
         const { username, email, password } = req.body;
 
         if (!username || !email || !password) {
-            return res.status(400).send({ error: 'Username, email, and password are required.' });
+            return res.status(400).send({ error: "Username, email, and password are required." });
         }
 
         const emailQuery = query(usersCollection, where("email", "==", email));
         const emailSnapshot = await getDocs(emailQuery);
 
         if (!emailSnapshot.empty) {
-            return res.status(400).send({ error: 'Email already exists!' });
+            return res.status(400).send({ error: "Email already exists!" });
         }
 
         const passwordHash = await bcrypt.hash(password, 10);
-
         const user = new User(username, email, passwordHash);
         const userRef = await addDoc(usersCollection, JSON.parse(JSON.stringify(user)));
 
         const saving = new Saving(userRef.id, 0);
         await addDoc(savingsCollection, JSON.parse(JSON.stringify(saving)));
 
+        // Generate JWT Token
+        const token = jwt.sign({ userId: userRef.id }, process.env.JWT_SECRET_KEY, {
+            expiresIn: process.env.JWT_EXPIRES_IN,
+        });
+
         res.status(201).send({
-            message: 'User registered successfully with a default saving!',
+            message: "User registered successfully with a default saving!",
             data: {
                 user,
                 saving: {
@@ -39,11 +44,12 @@ export const addUser = async (req, res) => {
                     amount: saving.amount,
                     createdAt: saving.createdAt,
                 },
+                token,
             },
         });
     } catch (error) {
         console.error("Error adding user and saving: ", error);
-        res.status(500).send({ error: 'Error adding user and saving!' });
+        res.status(500).send({ error: "Error adding user and saving!" });
     }
 };
 
@@ -64,20 +70,27 @@ export const getUsers = async (req, res) => {
 
 export const getSavings = async (req, res) => {
     try {
-        const savingsSnapshot = await getDocs(savingsCollection);
+        const { userId } = req.params;
+
+        const savingsQuery = query(savingsCollection, where("userId", "==", userId));
+        const savingsSnapshot = await getDocs(savingsQuery);
+
         if (savingsSnapshot.empty) {
-            return res.status(404).send({ error: 'No savings found!' });
+            return res.status(404).send({ error: "No savings found!" });
         }
+
         const savings = savingsSnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
         }));
+
         res.json(savings);
     } catch (e) {
         console.error("Error getting savings: ", e);
-        res.status(500).send({ error: 'Error fetching savings!' });
+        res.status(500).send({ error: "Error fetching savings!" });
     }
 };
+
 
 export const updateSaving = async (req, res) => {
     try {
