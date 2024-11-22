@@ -1,5 +1,5 @@
 import { db } from "../config/firebase.js";
-import { doc, addDoc, collection, getDocs, getDoc, query, where } from "firebase/firestore";
+import { doc, addDoc, collection, getDocs, getDoc, updateDoc, query, where } from "firebase/firestore";
 import { Saving } from "../models/saving.js";
 import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
@@ -197,5 +197,55 @@ export const getGoals = async (req, res) => {
     } catch (error) {
         console.error("Error fetching saving with goals: ", error);
         res.status(500).send({ error: 'Error fetching saving with goals!' });
+    }
+};
+
+export const updateGoal = async (req, res) => {
+    try {
+        const {savingId} = req.params;
+        const { goalId, title, targetAmount } = req.body;
+
+        if (!savingId || !goalId) {
+            return res.status(400).send({ error: 'savingId and goalId are required.' });
+        }
+
+        const goalRef = doc(db, "savings", savingId, "goals", goalId);
+
+        const goalSnapshot = await getDoc(goalRef);
+        if (!goalSnapshot.exists()) {
+            return res.status(404).send({ error: 'Goal not found.' });
+        }
+
+        const goalData = goalSnapshot.data();
+
+        const savingRef = doc(db, "savings", savingId);
+        const savingSnapshot = await getDoc(savingRef);
+
+        if (!savingSnapshot.exists()) {
+            return res.status(404).send({ error: 'Saving not found.' });
+        }
+
+        const savingData = savingSnapshot.data();
+        const { amount } = savingData;
+
+        const updatedData = {
+            title: title || goalData.title,
+            targetAmount: targetAmount || goalData.targetAmount,
+        };
+
+        const updatedTargetAmount = updatedData.targetAmount;
+        updatedData.status = amount >= updatedTargetAmount ? "completed" : "on-progress";
+
+        await updateDoc(goalRef, updatedData);
+
+        res.status(200).send({
+            id: goalId,
+            savingId: savingId,
+            ...updatedData,
+            amount: amount,
+        });
+    } catch (error) {
+        console.error("Error updating goal: ", error);
+        res.status(500).send({ error: 'Error updating goal!' });
     }
 };
