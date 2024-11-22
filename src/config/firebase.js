@@ -11,7 +11,7 @@ const firebaseConfig = {
   measurementId: "G-EFVLQDTP77"
 };
 
-console.log(process.env.FIREBASE_API_KEY);  // Periksa apakah API Key sudah terbaca
+// console.log(process.env.FIREBASE_API_KEY);
 
 
 const app = initializeApp(firebaseConfig);

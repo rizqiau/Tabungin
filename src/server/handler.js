@@ -62,29 +62,6 @@ export const getUsers = async (req, res) => {
     }
 };
 
-export const addSaving = async (req, res) => {
-    try {
-        const { userId } = req.body;
-
-        const userIdQuery = query(savingsCollection, where("userId", "==", userId));
-        const userIdSnapshot = await getDocs(userIdQuery);
-
-        if (!userIdSnapshot.empty) {
-            return res.status(400).send({ error: 'userId already exists! Please use updateSaving endpoint.' });
-        }
-
-        const saving = new Saving(
-            req.body.userId,
-            req.body.amount
-        );
-        await addDoc(savingsCollection, JSON.parse(JSON.stringify(saving)));
-        res.status(201).send({ message: 'Saving added successfully!', data: saving });
-    } catch (e) {
-        console.error("Error adding saving: ", e);
-        res.status(500).send({ error: 'Error adding saving!' });
-    }
-};
-
 export const getSavings = async (req, res) => {
     try {
         const savingsSnapshot = await getDocs(savingsCollection);
@@ -104,7 +81,8 @@ export const getSavings = async (req, res) => {
 
 export const updateSaving = async (req, res) => {
     try {
-        const { userId, amount } = req.body;
+        const { userId } = req.params;
+        const { amount } = req.body;
 
         if (!userId || typeof amount !== "number") {
             return res.status(400).send({ error: 'UserId and amount are required, and amount must be a number.' });
@@ -161,7 +139,8 @@ export const updateSaving = async (req, res) => {
 
 export const reduceSaving = async (req, res) => {
     try {
-        const { userId, amount } = req.body;
+        const { userId } = req.params;
+        const { amount } = req.body;
 
         if (!userId || typeof amount !== "number" || amount <= 0) {
             return res.status(400).send({ error: 'UserId and a positive amount are required.' });
@@ -183,7 +162,6 @@ export const reduceSaving = async (req, res) => {
             return res.status(400).send({ error: 'Insufficient saving amount to reduce.' });
         }
 
-        // Update saving amount
         const updatedAmount = existingData.amount - amount;
         const updatedData = {
             amount: updatedAmount,
@@ -192,7 +170,6 @@ export const reduceSaving = async (req, res) => {
 
         await updateDoc(savingRef, updatedData);
 
-        // Update goals status based on the new amount
         const goalsCollectionRef = collection(savingRef, "goals");
         const goalsSnapshot = await getDocs(goalsCollectionRef);
 
@@ -225,7 +202,8 @@ export const reduceSaving = async (req, res) => {
 
 export const addGoal = async (req, res) => {
     try {
-        const { savingId, title, targetAmount } = req.body;
+        const {savingId} = req.params;
+        const { title, targetAmount } = req.body;
 
         if (!savingId || !title || !targetAmount) {
             return res.status(400).send({ error: 'savingId, title, and targetAmount are required.' });
@@ -302,8 +280,8 @@ export const getGoals = async (req, res) => {
 
 export const updateGoal = async (req, res) => {
     try {
-        const {savingId} = req.params;
-        const { goalId, title, targetAmount } = req.body;
+        const { savingId, goalId } = req.params;
+        const {  title, targetAmount } = req.body;
 
         if (!savingId || !goalId) {
             return res.status(400).send({ error: 'savingId and goalId are required.' });
@@ -352,8 +330,7 @@ export const updateGoal = async (req, res) => {
 
 export const deleteGoal = async (req, res) => {
     try {
-        const {savingId} = req.params;
-        const { goalId } = req.body;
+        const { savingId, goalId } = req.params;
 
         if (!savingId || !goalId) {
             return res.status(400).send({ error: 'goalId are required.' });
