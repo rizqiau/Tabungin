@@ -1,8 +1,7 @@
 import { db } from "../config/firebase.js";
-import { doc, addDoc, collection, getDocs, updateDoc, query, where } from "firebase/firestore";
+import { doc, addDoc, collection, getDocs, getDoc, query, where } from "firebase/firestore";
 import { Saving } from "../models/saving.js";
 import { User } from "../models/user.js";
-import { Goal } from "../models/goal.js";
 import bcrypt from "bcrypt";
 
 const usersCollection = collection(db, 'users');
@@ -130,29 +129,31 @@ export const updateSaving = async (req, res) => {
 
 export const addGoal = async (req, res) => {
     try {
-        const { userId, title, targetAmount } = req.body;
+        const { savingId, title, targetAmount } = req.body;
 
-        if (!userId || !title || !targetAmount) {
-            return res.status(400).send({ error: 'UserId, title, and targetAmount are required.' });
+        if (!savingId || !title || !targetAmount) {
+            return res.status(400).send({ error: 'savingId, title, and targetAmount are required.' });
         }
 
-        const savingsQuery = query(savingsCollection, where("userId", "==", userId));
-        const savingsSnapshot = await getDocs(savingsQuery);
+        const savingRef = doc(db, "savings", savingId);
+        const savingSnapshot = await getDoc(savingRef);
 
-        const totalAmount = savingsSnapshot.docs.reduce((sum, doc) => sum + doc.data().amount, 0);
+        if (!savingSnapshot.exists()) {
+            return res.status(404).send({ error: 'Saving not found for the provided savingId.' });
+        }
+
+        const savingData = savingSnapshot.data();
+        const totalAmount = savingData.amount;
 
         const status = totalAmount >= targetAmount ? "completed" : "on-progress";
 
-        const goal = new Goal(userId, title, targetAmount, totalAmount);
-        const docRef = await addDoc(goalsCollection, JSON.parse(JSON.stringify(goal)));
+        const goalsCollectionRef = collection(savingRef, "goals");
+        const goalData = { title, targetAmount, status };
+        const goalRef = await addDoc(goalsCollectionRef, goalData);
 
         res.status(201).send({
-            id: docRef.id,
-            userId: goal.userId,
-            title: goal.title,
-            targetAmount: goal.targetAmount,
-            amount: goal.amount,
-            status: goal.status,
+            id: goalRef.id,
+            ...goalData,
         });
     } catch (error) {
         console.error("Error adding goal: ", error);
@@ -162,14 +163,39 @@ export const addGoal = async (req, res) => {
 
 export const getGoals = async (req, res) => {
     try {
-        const goalsSnapshot = await getDocs(goalsCollection);
+        const { savingId } = req.params;
+
+        if (!savingId) {
+            return res.status(400).send({ error: 'savingId is required.' });
+        }
+
+        const savingRef = doc(db, "savings", savingId);
+        const savingSnapshot = await getDoc(savingRef);
+
+        if (!savingSnapshot.exists()) {
+            return res.status(404).send({ error: 'Saving not found.' });
+        }
+
+        const savingData = savingSnapshot.data();
+
+        const goalsCollectionRef = collection(savingRef, "goals");
+        const goalsSnapshot = await getDocs(goalsCollectionRef);
+
         const goals = goalsSnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
         }));
-        res.json(goals);
+
+        const response = {
+            id: savingId,
+            userId: savingData.userId,
+            amount: savingData.amount,
+            goals: goals,
+        };
+
+        res.status(200).send(response);
     } catch (error) {
-        console.error("Error fetching goals: ", error);
-        res.status(500).send({ error: 'Error fetching goals!' });
+        console.error("Error fetching saving with goals: ", error);
+        res.status(500).send({ error: 'Error fetching saving with goals!' });
     }
 };
