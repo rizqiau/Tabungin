@@ -1,9 +1,8 @@
 export class Saving {
-    constructor(name, amount, goal, status, createdAt) {
-        this.name = name;
+    constructor(userId, amount, createdAt, updatedAt ) {
+        this.userId = userId;
         this.amount = amount;
-        this.goal = goal;
-        this.status = status;
-        this.createdAt = createdAt;
+        this.createdAt = createdAt || new Date();
+        this.updatedAt = updatedAt || new Date();
     }
 }
