@@ -1,5 +1,5 @@
 import { db } from "../config/firebase.js";
-import { doc, addDoc, collection, getDocs, getDoc, updateDoc, query, where } from "firebase/firestore";
+import { doc, addDoc, collection, getDocs, getDoc, updateDoc, deleteDoc, query, where } from "firebase/firestore";
 import { Saving } from "../models/saving.js";
 import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
@@ -247,5 +247,30 @@ export const updateGoal = async (req, res) => {
     } catch (error) {
         console.error("Error updating goal: ", error);
         res.status(500).send({ error: 'Error updating goal!' });
+    }
+};
+
+export const deleteGoal = async (req, res) => {
+    try {
+        const {savingId} = req.params;
+        const { goalId } = req.body;
+
+        if (!savingId || !goalId) {
+            return res.status(400).send({ error: 'goalId are required.' });
+        }
+
+        const goalRef = doc(db, "savings", savingId, "goals", goalId);
+
+        const goalSnapshot = await getDoc(goalRef);
+        if (!goalSnapshot.exists()) {
+            return res.status(404).send({ error: 'Goal not found.' });
+        }
+
+        await deleteDoc(goalRef);
+
+        res.status(200).send({ message: 'Goal deleted successfully.', goalId, savingId });
+    } catch (error) {
+        console.error("Error deleting goal: ", error);
+        res.status(500).send({ error: 'Error deleting goal!' });
     }
 };
