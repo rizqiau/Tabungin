@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.app.auth.LoginFragment"
+        android:name="com.example.ones.ui.auth.LoginFragment"
         android:label="Login">
         <action
             android:id="@+id/action_login_to_signup"
