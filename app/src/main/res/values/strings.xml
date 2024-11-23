@@ -16,4 +16,9 @@
     <string name="back">back</string>
     <string name="create_account">Create Account</string>
     <string name="email">Email</string>
+    <string name="password_updated">Password Updated!!</string>
+    <string name="password_updated_desc">Your password has been setup successfully</string>
+    <string name="back_to_login">BACK TO LOGIN</string>
+    <string name="create_password">Create Your New Password</string>
+    <string name="create_password_desc">Your new password must be different from previous password.</string>
 </resources>
