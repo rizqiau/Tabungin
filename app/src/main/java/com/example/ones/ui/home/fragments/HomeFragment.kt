@@ -1,4 +1,4 @@
-package com.example.ones.ui.home
+package com.example.ones.ui.home.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.ones.databinding.FragmentHomeBinding
+import com.example.ones.viewmodel.home.HomeViewModel
 
 class HomeFragment : Fragment() {
 
