@@ -21,4 +21,7 @@
     <string name="back_to_login">BACK TO LOGIN</string>
     <string name="create_password">Create Your New Password</string>
     <string name="create_password_desc">Your new password must be different from previous password.</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="add">add</string>
+    <string name="fab">fab</string>
 </resources>
