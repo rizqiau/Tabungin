@@ -6,7 +6,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const usersCollection = collection(db, 'users');
-const savingsCollection = collection(db, 'savings');
 
 export const addUser = async (req, res) => {
     try {

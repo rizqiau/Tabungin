@@ -8,7 +8,7 @@ export const authenticate = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        req.userId = decoded.userId; // Menyimpan userId di request
+        req.userId = decoded.userId;
         next();
     } catch (error) {
         console.error("Invalid token: ", error);
