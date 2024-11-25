@@ -3,7 +3,7 @@ import routes from "./routes.js";
 import bodyParser from "body-parser";
 
 const app = express()
-const port = 8000
+const port = 9000
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

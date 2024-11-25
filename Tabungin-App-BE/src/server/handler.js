@@ -91,6 +91,7 @@ export const loginUser = async (req, res) => {
     }
 };
 
+
 export const getUsers = async (req, res) => {
     try {
         const usersSnapshot = await getDocs(usersCollection);
@@ -107,7 +108,7 @@ export const getUsers = async (req, res) => {
 
 export const getSavings = async (req, res) => {
     try {
-        const { userId } = req.body;
+        const { userId } = req.params;
 
         const userRef = doc(usersCollection, userId);
         const savingsCollectionRef = collection(userRef, "savings");
@@ -131,7 +132,8 @@ export const getSavings = async (req, res) => {
 
 export const updateSaving = async (req, res) => {
     try {
-        const { userId, amount } = req.body;
+        const { userId } = req.params;
+        const { amount } = req.body;
 
         if (!userId || typeof amount !== "number") {
             return res.status(400).send({ error: 'Amount are required, and amount must be a number.' });
@@ -191,7 +193,8 @@ export const updateSaving = async (req, res) => {
 
 export const reduceSaving = async (req, res) => {
     try {
-        const { userId, amount } = req.body;
+        const { userId } = req.params;
+        const { amount } = req.body;
 
         if (!userId || typeof amount !== "number" || amount <= 0) {
             return res.status(400).send({ error: 'Positive amount are required.' });
@@ -254,31 +257,21 @@ export const reduceSaving = async (req, res) => {
 
 export const addGoal = async (req, res) => {
     try {
-        const { savingId, title, targetAmount } = req.body;
+        const { userId, savingId } = req.params;
+        const { title, targetAmount } = req.body;
 
-        if (!title || !targetAmount || !savingId) {
-            return res.status(400).send({ error: 'Saving ID, title, and target amount are required.' });
+        if (!title || !targetAmount) {
+            return res.status(400).send({ error: 'title or targetAmount are required.' });
         }
 
-        const usersSnapshot = await getDocs(collection(db, "users"));
-        let savingRef = null;
+        const savingRef = doc(usersCollection, userId, "savings", savingId);
+        const savingSnapshot = await getDoc(savingRef);
 
-        for (const userDoc of usersSnapshot.docs) {
-            const savingsRef = collection(userDoc.ref, "savings");
-            const savingQuery = query(savingsRef, where("__name__", "==", savingId));
-            const savingSnapshot = await getDocs(savingQuery);
-
-            if (!savingSnapshot.empty) {
-                savingRef = savingSnapshot.docs[0].ref;
-                break;
-            }
-        }
-
-        if (!savingRef) {
+        if (!savingSnapshot.exists()) {
             return res.status(404).send({ error: 'Saving not found.' });
         }
 
-        const savingData = (await getDoc(savingRef)).data();
+        const savingData = savingSnapshot.data();
         const totalAmount = savingData.amount;
 
         const status = totalAmount >= targetAmount ? "Completed" : "On-Progress";
@@ -300,31 +293,21 @@ export const addGoal = async (req, res) => {
 
 export const getGoals = async (req, res) => {
     try {
-        const { savingId } = req.body;
+        const { userId, savingId } = req.params;
 
-        if (!savingId) {
-            return res.status(400).send({ error: 'Saving ID is required.' });
+        if (!userId || !savingId) {
+            return res.status(400).send({ error: 'userId and savingId are required.' });
         }
 
-        const usersSnapshot = await getDocs(collection(db, "users"));
-        let savingRef = null;
+        const savingRef = doc(db, "users", userId, "savings", savingId);
+        const savingSnapshot = await getDoc(savingRef);
 
-        for (const userDoc of usersSnapshot.docs) {
-            const savingsRef = collection(userDoc.ref, "savings");
-            const savingQuery = query(savingsRef, where("__name__", "==", savingId));
-            const savingSnapshot = await getDocs(savingQuery);
-
-            if (!savingSnapshot.empty) {
-                savingRef = savingSnapshot.docs[0].ref;
-                break;
-            }
-        }
-
-        if (!savingRef) {
+        if (!savingSnapshot.exists()) {
             return res.status(404).send({ error: 'Saving not found.' });
         }
 
-        const savingData = (await getDoc(savingRef)).data();
+        const savingData = savingSnapshot.data();
+
         const goalsCollectionRef = collection(savingRef, "goals");
         const goalsSnapshot = await getDocs(goalsCollectionRef);
 
@@ -337,70 +320,64 @@ export const getGoals = async (req, res) => {
             ...doc.data(),
         }));
 
-        res.status(200).send({
-            savingId,
+        const response = {
+            id: savingId,
+            userId,
             amount: savingData.amount,
-            goals,
-        });
+            goals: goals,
+        };
+
+        res.status(200).send(response);
     } catch (error) {
-        console.error("Error fetching goals: ", error);
-        res.status(500).send({ error: 'Error fetching goals!' });
+        console.error("Error fetching saving with goals: ", error);
+        res.status(500).send({ error: 'Error fetching saving with goals!' });
     }
 };
 
 
-
 export const updateGoal = async (req, res) => {
     try {
-        const { goalId, title, targetAmount } = req.body;
+        const { userId, savingId, goalId } = req.params;
+        const { title, targetAmount } = req.body;
 
-        if (!goalId) {
-            return res.status(400).send({ error: 'goalId is required.' });
+        if (!userId || !savingId || !goalId) {
+            return res.status(400).send({ error: 'userId, savingId, and goalId are required.' });
         }
 
-        const usersSnapshot = await getDocs(collection(db, "users"));
-        let goalRef = null;
-        let savingRef = null;
+        const goalRef = doc(db, "users", userId, "savings", savingId, "goals", goalId);
 
-        for (const userDoc of usersSnapshot.docs) {
-            const savingsCollectionRef = collection(userDoc.ref, "savings");
-            const savingsSnapshot = await getDocs(savingsCollectionRef);
-
-            for (const savingDoc of savingsSnapshot.docs) {
-                const goalsCollectionRef = collection(savingDoc.ref, "goals");
-                const goalQuery = query(goalsCollectionRef, where("__name__", "==", goalId));
-                const goalSnapshot = await getDocs(goalQuery);
-
-                if (!goalSnapshot.empty) {
-                    goalRef = goalSnapshot.docs[0].ref;
-                    savingRef = savingDoc.ref;
-                    break;
-                }
-            }
-
-            if (goalRef) break;
-        }
-
-        if (!goalRef || !savingRef) {
+        const goalSnapshot = await getDoc(goalRef);
+        if (!goalSnapshot.exists()) {
             return res.status(404).send({ error: 'Goal not found.' });
         }
 
-        const savingData = (await getDoc(savingRef)).data();
-        const amount = savingData.amount;
+        const goalData = goalSnapshot.data();
+
+        const savingRef = doc(db, "users", userId, "savings", savingId);
+        const savingSnapshot = await getDoc(savingRef);
+
+        if (!savingSnapshot.exists()) {
+            return res.status(404).send({ error: 'Saving not found.' });
+        }
+
+        const savingData = savingSnapshot.data();
+        const { amount } = savingData;
 
         const updatedData = {
-            title: title || (await getDoc(goalRef)).data().title,
-            targetAmount: targetAmount || (await getDoc(goalRef)).data().targetAmount,
+            title: title || goalData.title,
+            targetAmount: targetAmount || goalData.targetAmount,
         };
 
-        updatedData.status = amount >= updatedData.targetAmount ? "Completed" : "On-Progress";
+        const updatedTargetAmount = updatedData.targetAmount;
+        updatedData.status = amount >= updatedTargetAmount ? "Completed" : "On-Progress";
 
         await updateDoc(goalRef, updatedData);
 
         res.status(200).send({
-            goalId,
+            id: goalId,
+            savingId: savingId,
             ...updatedData,
-            amount,
+            amount: amount,
         });
     } catch (error) {
         console.error("Error updating goal: ", error);
@@ -409,46 +386,26 @@ export const updateGoal = async (req, res) => {
 };
 
 
-
 export const deleteGoal = async (req, res) => {
     try {
-        const { goalId } = req.body;
+        const { userId, savingId, goalId } = req.params;
 
-        if (!goalId) {
-            return res.status(400).send({ error: 'goalId is required.' });
+        if (!userId || !savingId || !goalId) {
+            return res.status(400).send({ error: 'userId, savingId, and goalId are required.' });
         }
 
-        const usersSnapshot = await getDocs(collection(db, "users"));
-        let goalRef = null;
+        const goalRef = doc(db, "users", userId, "savings", savingId, "goals", goalId);
 
-        for (const userDoc of usersSnapshot.docs) {
-            const savingsCollectionRef = collection(userDoc.ref, "savings");
-            const savingsSnapshot = await getDocs(savingsCollectionRef);
-
-            for (const savingDoc of savingsSnapshot.docs) {
-                const goalsCollectionRef = collection(savingDoc.ref, "goals");
-                const goalQuery = query(goalsCollectionRef, where("__name__", "==", goalId));
-                const goalSnapshot = await getDocs(goalQuery);
-
-                if (!goalSnapshot.empty) {
-                    goalRef = goalSnapshot.docs[0].ref;
-                    break;
-                }
-            }
-
-            if (goalRef) break;
-        }
-
-        if (!goalRef) {
+        const goalSnapshot = await getDoc(goalRef);
+        if (!goalSnapshot.exists()) {
             return res.status(404).send({ error: 'Goal not found.' });
         }
 
         await deleteDoc(goalRef);
 
-        res.status(200).send({ message: 'Goal deleted successfully.', goalId });
+        res.status(200).send({ message: 'Goal deleted successfully.', goalId, savingId });
     } catch (error) {
         console.error("Error deleting goal: ", error);
         res.status(500).send({ error: 'Error deleting goal!' });
     }
 };
-
