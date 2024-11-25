@@ -27,18 +27,16 @@ export const addUser = async (req, res) => {
 
         const userRef = await addDoc(usersCollection, JSON.parse(JSON.stringify(user)));
 
-        // Create a default saving in the user's sub-collection
         const saving = new Saving(userRef.id, 0);
         const savingsCollectionRef = collection(userRef, "savings");
         await addDoc(savingsCollectionRef, JSON.parse(JSON.stringify(saving)));
 
-        // Generate JWT Token
         const token = jwt.sign({ userId: userRef.id }, process.env.JWT_SECRET_KEY, {
             expiresIn: process.env.JWT_EXPIRES_IN,
         });
 
         res.status(201).send({
-            message: "User registered successfully with a default saving!",
+            message: "User registered successfully!",
             data: {
                 user,
                 saving: {
@@ -50,12 +48,10 @@ export const addUser = async (req, res) => {
             },
         });
     } catch (error) {
-        console.error("Error adding user and saving: ", error);
-        res.status(500).send({ error: "Error adding user and saving!" });
+        console.error("Error adding user: ", error);
+        res.status(500).send({ error: "Error adding user!" });
     }
 };
-
-
 
 export const getUsers = async (req, res) => {
     try {
@@ -95,15 +91,13 @@ export const getSavings = async (req, res) => {
     }
 };
 
-
-
 export const updateSaving = async (req, res) => {
     try {
         const { userId } = req.params;
         const { amount } = req.body;
 
         if (!userId || typeof amount !== "number") {
-            return res.status(400).send({ error: 'UserId and amount are required, and amount must be a number.' });
+            return res.status(400).send({ error: 'Amount are required, and amount must be a number.' });
         }
 
         const userRef = doc(db, "users", userId);
@@ -112,7 +106,7 @@ export const updateSaving = async (req, res) => {
         const savingsSnapshot = await getDocs(savingsCollectionRef);
 
         if (savingsSnapshot.empty) {
-            return res.status(404).send({ error: 'Saving not found for the given userId.' });
+            return res.status(404).send({ error: 'Saving not found.' });
         }
 
         const savingDoc = savingsSnapshot.docs[0]; 
@@ -133,7 +127,7 @@ export const updateSaving = async (req, res) => {
 
         const batchPromises = goalsSnapshot.docs.map(async (goalDoc) => {
             const goalData = goalDoc.data();
-            const newStatus = updatedAmount >= goalData.targetAmount ? "completed" : "on-progress";
+            const newStatus = updatedAmount >= goalData.targetAmount ? "Completed" : "On-Progress";
 
             if (goalData.status !== newStatus) {
                 const goalRef = doc(goalsCollectionRef, goalDoc.id);
@@ -144,7 +138,7 @@ export const updateSaving = async (req, res) => {
         await Promise.all(batchPromises);
 
         res.status(200).send({
-            message: 'Saving and goals updated successfully!',
+            message: 'Saving updated successfully!',
             data: {
                 id: savingDoc.id,
                 userId,
@@ -153,7 +147,7 @@ export const updateSaving = async (req, res) => {
         });
     } catch (error) {
         console.error("Error updating saving: ", error);
-        res.status(500).send({ error: 'Error updating saving and goals!' });
+        res.status(500).send({ error: 'Error updating saving!' });
     }
 };
 
@@ -164,7 +158,7 @@ export const reduceSaving = async (req, res) => {
         const { amount } = req.body;
 
         if (!userId || typeof amount !== "number" || amount <= 0) {
-            return res.status(400).send({ error: 'UserId and a positive amount are required.' });
+            return res.status(400).send({ error: 'Positive amount are required.' });
         }
 
         const userRef = doc(db, "users", userId);
@@ -173,7 +167,7 @@ export const reduceSaving = async (req, res) => {
         const savingsSnapshot = await getDocs(savingsCollectionRef);
 
         if (savingsSnapshot.empty) {
-            return res.status(404).send({ error: 'Saving not found for the given userId.' });
+            return res.status(404).send({ error: 'Saving not found.' });
         }
 
         const savingDoc = savingsSnapshot.docs[0];
@@ -198,7 +192,7 @@ export const reduceSaving = async (req, res) => {
 
         const batchPromises = goalsSnapshot.docs.map(async (goalDoc) => {
             const goalData = goalDoc.data();
-            const newStatus = updatedAmount >= goalData.targetAmount ? "completed" : "on-progress";
+            const newStatus = updatedAmount >= goalData.targetAmount ? "Completed" : "On-Progress";
 
             if (goalData.status !== newStatus) {
                 const goalRef = doc(goalsCollectionRef, goalDoc.id);
@@ -209,7 +203,7 @@ export const reduceSaving = async (req, res) => {
         await Promise.all(batchPromises);
 
         res.status(200).send({
-            message: 'Saving reduced and goals updated successfully!',
+            message: 'Saving reduced successfully!',
             data: {
                 id: savingDoc.id,
                 userId,
@@ -218,7 +212,7 @@ export const reduceSaving = async (req, res) => {
         });
     } catch (error) {
         console.error("Error reducing saving: ", error);
-        res.status(500).send({ error: 'Error reducing saving and updating goals!' });
+        res.status(500).send({ error: 'Error reducing saving!' });
     }
 };
 
@@ -229,8 +223,8 @@ export const addGoal = async (req, res) => {
         const { userId, savingId } = req.params;
         const { title, targetAmount } = req.body;
 
-        if (!userId || !savingId || !title || !targetAmount) {
-            return res.status(400).send({ error: 'userId, savingId, title, and targetAmount are required.' });
+        if (!title || !targetAmount) {
+            return res.status(400).send({ error: 'title or targetAmount are required.' });
         }
 
         const savingRef = doc(usersCollection, userId, "savings", savingId);
@@ -243,7 +237,7 @@ export const addGoal = async (req, res) => {
         const savingData = savingSnapshot.data();
         const totalAmount = savingData.amount;
 
-        const status = totalAmount >= targetAmount ? "completed" : "on-progress";
+        const status = totalAmount >= targetAmount ? "Completed" : "On-Progress";
 
         const goalsCollectionRef = collection(savingRef, "goals");
         const goalData = { title, targetAmount, status };
@@ -281,7 +275,7 @@ export const getGoals = async (req, res) => {
         const goalsSnapshot = await getDocs(goalsCollectionRef);
 
         if (goalsSnapshot.empty) {
-            return res.status(404).send({ error: 'No goals found for the saving.' });
+            return res.status(404).send({ error: 'No goals found.' });
         }
 
         const goals = goalsSnapshot.docs.map((doc) => ({
@@ -338,7 +332,7 @@ export const updateGoal = async (req, res) => {
         };
 
         const updatedTargetAmount = updatedData.targetAmount;
-        updatedData.status = amount >= updatedTargetAmount ? "completed" : "on-progress";
+        updatedData.status = amount >= updatedTargetAmount ? "Completed" : "On-Progress";
 
         await updateDoc(goalRef, updatedData);
 
