@@ -53,6 +53,45 @@ export const addUser = async (req, res) => {
     }
 };
 
+export const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).send({ error: "Email dan password harus diisi." });
+        }
+
+        const emailQuery = query(usersCollection, where("email", "==", email));
+        const emailSnapshot = await getDocs(emailQuery);
+
+        if (emailSnapshot.empty) {
+            return res.status(404).send({ error: "Email tidak ditemukan." });
+        }
+
+        const userDoc = emailSnapshot.docs[0];
+        const user = userDoc.data();
+
+        const passwordMatch = await bcrypt.compare(password, user.passwordHash);
+
+        if (!passwordMatch) {
+            return res.status(401).send({ error: "Password salah." });
+        }
+
+        const token = jwt.sign({ userId: userDoc.id }, process.env.JWT_SECRET_KEY, {
+            expiresIn: process.env.JWT_EXPIRES_IN,
+        });
+
+        res.status(200).send({
+            message: "Login berhasil.",
+            token,
+        });
+    } catch (error) {
+        console.error("Error saat login: ", error);
+        res.status(500).send({ error: "Error saat login!" });
+    }
+};
+
+
 export const getUsers = async (req, res) => {
     try {
         const usersSnapshot = await getDocs(usersCollection);
