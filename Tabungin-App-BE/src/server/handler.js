@@ -108,7 +108,7 @@ export const getUsers = async (req, res) => {
 
 export const getSavings = async (req, res) => {
     try {
-        const { userId } = req.params;
+        const { userId } = req.body;
 
         const userRef = doc(usersCollection, userId);
         const savingsCollectionRef = collection(userRef, "savings");
@@ -132,8 +132,7 @@ export const getSavings = async (req, res) => {
 
 export const updateSaving = async (req, res) => {
     try {
-        const { userId } = req.params;
-        const { amount } = req.body;
+        const { userId, amount } = req.body;
 
         if (!userId || typeof amount !== "number") {
             return res.status(400).send({ error: 'Amount are required, and amount must be a number.' });
@@ -148,7 +147,7 @@ export const updateSaving = async (req, res) => {
             return res.status(404).send({ error: 'Saving not found.' });
         }
 
-        const savingDoc = savingsSnapshot.docs[0]; 
+        const savingDoc = savingsSnapshot.docs[0];
         const savingRef = doc(savingsCollectionRef, savingDoc.id);
 
         const existingData = savingDoc.data();
@@ -193,8 +192,7 @@ export const updateSaving = async (req, res) => {
 
 export const reduceSaving = async (req, res) => {
     try {
-        const { userId } = req.params;
-        const { amount } = req.body;
+        const { userId, amount } = req.body;
 
         if (!userId || typeof amount !== "number" || amount <= 0) {
             return res.status(400).send({ error: 'Positive amount are required.' });
@@ -259,8 +257,7 @@ export const reduceSaving = async (req, res) => {
 
 export const addGoal = async (req, res) => {
     try {
-        const { userId, savingId } = req.params;
-        const { title, targetAmount } = req.body;
+        const { userId, savingId, title, targetAmount } = req.body;
 
         if (!title || !targetAmount) {
             return res.status(400).send({ error: 'title or targetAmount are required.' });
@@ -295,7 +292,7 @@ export const addGoal = async (req, res) => {
 
 export const getGoals = async (req, res) => {
     try {
-        const { userId, savingId } = req.params;
+        const { userId, savingId } = req.body;
 
         if (!userId || !savingId) {
             return res.status(400).send({ error: 'userId and savingId are required.' });
@@ -339,8 +336,7 @@ export const getGoals = async (req, res) => {
 
 export const updateGoal = async (req, res) => {
     try {
-        const { userId, savingId, goalId } = req.params;
-        const { title, targetAmount } = req.body;
+        const { userId, savingId, goalId, title, targetAmount } = req.body;
 
         if (!userId || !savingId || !goalId) {
             return res.status(400).send({ error: 'userId, savingId, and goalId are required.' });
@@ -390,7 +386,7 @@ export const updateGoal = async (req, res) => {
 
 export const deleteGoal = async (req, res) => {
     try {
-        const { userId, savingId, goalId } = req.params;
+        const { userId, savingId, goalId } = req.body;
 
         if (!userId || !savingId || !goalId) {
             return res.status(400).send({ error: 'userId, savingId, and goalId are required.' });

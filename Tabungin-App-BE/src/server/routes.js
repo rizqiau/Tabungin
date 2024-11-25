@@ -19,13 +19,13 @@ routes.post("/users", addUser);
 routes.post("/login", loginUser);
 routes.get("/users", authenticate, getUsers);
 
-routes.get("/savings/:userId", authenticate, getSavings);
-routes.put("/savings/:userId", authenticate, updateSaving);
-routes.put("/savings/reduce/:userId", authenticate, reduceSaving);
+routes.get("/savings", authenticate, getSavings);
+routes.put("/savings", authenticate, updateSaving);
+routes.put("/savings/reduce", authenticate, reduceSaving);
 
-routes.post("/goals/:userId/:savingId", authenticate, addGoal);
-routes.get("/goals/:userId/:savingId", authenticate, getGoals);
-routes.put("/goals/:userId/:savingId/:goalId", authenticate, updateGoal);
-routes.delete("/goals/:userId/:savingId/:goalId", authenticate, deleteGoal);
+routes.post("/goals", authenticate, addGoal);
+routes.get("/goals", authenticate, getGoals);
+routes.put("/goals", authenticate, updateGoal);
+routes.delete("/goals", authenticate, deleteGoal);
 
 export default routes;
