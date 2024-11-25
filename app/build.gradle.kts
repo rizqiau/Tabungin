@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.activity)
+    implementation(libs.androidx.recyclerview)
     implementation (libs.material.v130alpha03)
     implementation(libs.androidx.core.splashscreen)
     testImplementation(libs.junit)

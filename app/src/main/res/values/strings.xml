@@ -24,4 +24,9 @@
     <string name="reset_password">Reset Password</string>
     <string name="add">add</string>
     <string name="fab">fab</string>
+    <string name="profile_picture">profile_picture</string>
+    <string name="remind">remind</string>
+    <string name="budget">budget</string>
+    <string name="latest_entries">Latest Entries</string>
+    <string name="entry_icon">entry_icon</string>
 </resources>
