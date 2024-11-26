@@ -1,7 +1,7 @@
 import {
     getSavings,
     updateSaving,
-    reduceSaving,
+    deleteTransaction,
     addUser,
     loginUser,
     getUsers,
@@ -21,7 +21,7 @@ routes.get("/users", authenticate, getUsers);
 
 routes.get("/savings/:userId", authenticate, getSavings);
 routes.put("/savings/:userId", authenticate, updateSaving);
-routes.put("/savings/reduce/:userId", authenticate, reduceSaving);
+routes.delete("/savings/:userId/:savingId/:transactionId", authenticate, deleteTransaction);
 
 routes.post("/goals/:userId/:savingId", authenticate, addGoal);
 routes.get("/goals/:userId/:savingId", authenticate, getGoals);
