@@ -184,6 +184,18 @@ export const updateSaving = async (req, res) => {
 
         await addDoc(transactionsCollectionRef, transactionData);
 
+        const goalsCollectionRef = collection(savingRef, "goals");
+        const goalsSnapshot = await getDocs(goalsCollectionRef);
+
+        goalsSnapshot.docs.forEach(async (goalDoc) => {
+            const goalRef = doc(goalsCollectionRef, goalDoc.id);
+            const goalData = goalDoc.data();
+
+            const updatedStatus = updatedAmount >= goalData.targetAmount ? "Completed" : "On-Progress";
+
+            await updateDoc(goalRef, { status: updatedStatus });
+        });
+
         res.status(200).send({
             message: 'Saving updated successfully!',
             data: {
@@ -244,6 +256,18 @@ export const reduceSaving = async (req, res) => {
         };
 
         await addDoc(transactionsCollectionRef, transactionData);
+
+        const goalsCollectionRef = collection(savingRef, "goals");
+        const goalsSnapshot = await getDocs(goalsCollectionRef);
+
+        goalsSnapshot.docs.forEach(async (goalDoc) => {
+            const goalRef = doc(goalsCollectionRef, goalDoc.id);
+            const goalData = goalDoc.data();
+
+            const updatedStatus = updatedAmount >= goalData.targetAmount ? "Completed" : "On-Progress";
+
+            await updateDoc(goalRef, { status: updatedStatus });
+        });
 
         res.status(200).send({
             message: 'Saving reduced successfully!',
