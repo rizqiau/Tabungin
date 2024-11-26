@@ -91,20 +91,77 @@ export const loginUser = async (req, res) => {
     }
 };
 
-
-export const getUsers = async (req, res) => {
+export const getUser = async (req, res) => {
     try {
-        const usersSnapshot = await getDocs(usersCollection);
-        const users = usersSnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
-        res.json(users);
+        const { userId } = req.params;
+
+        const userRef = doc(usersCollection, userId);
+        const userSnapshot = await getDoc(userRef);
+
+        if (!userSnapshot.exists()) {
+            return res.status(404).send({ error: "User not found." });
+        }
+
+        const userData = userSnapshot.data();
+
+        res.status(200).send({
+            id: userSnapshot.id,
+            ...userData,
+        });
     } catch (error) {
-        console.error("Error fetching users: ", error);
-        res.status(500).send({ error: 'Error fetching users!' });
+        console.error("Error fetching user: ", error);
+        res.status(500).send({ error: 'Error fetching user!' });
     }
 };
+
+export const deleteUser = async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        const userRef = doc(db, "users", userId);
+        const userSnapshot = await getDoc(userRef);
+
+        if (!userSnapshot.exists()) {
+            return res.status(404).send({ error: "User not found." });
+        }
+
+        const savingsCollectionRef = collection(userRef, "savings");
+        const savingsSnapshot = await getDocs(savingsCollectionRef);
+
+        if (!savingsSnapshot.empty) {
+            for (const savingDoc of savingsSnapshot.docs) {
+                const savingRef = doc(savingsCollectionRef, savingDoc.id);
+                const additionCollectionRef = collection(savingRef, "addition");
+                const reductionCollectionRef = collection(savingRef, "reduction");
+                const goalsCollectionRef = collection(savingRef, "goals");
+
+                const additionsSnapshot = await getDocs(additionCollectionRef);
+                additionsSnapshot.forEach(async (addDoc) => {
+                    await deleteDoc(doc(additionCollectionRef, addDoc.id));
+                });
+
+                const reductionsSnapshot = await getDocs(reductionCollectionRef);
+                reductionsSnapshot.forEach(async (redDoc) => {
+                    await deleteDoc(doc(reductionCollectionRef, redDoc.id));
+                });
+
+                const goalsSnapshot = await getDocs(goalsCollectionRef);
+                goalsSnapshot.forEach(async (goalDoc) => {
+                    await deleteDoc(doc(goalsCollectionRef, goalDoc.id));
+                });
+
+                await deleteDoc(savingRef);
+            }
+        }
+
+        await deleteDoc(userRef);
+
+        res.status(200).send({ message: "User deleted successfully." });
+    } catch (error) {
+        console.error("Error deleting user: ", error);
+        res.status(500).send({ error: 'Error deleting user!' });
+    }
+}
 
 export const getSavings = async (req, res) => {
     try {
@@ -157,7 +214,7 @@ export const deleteTransaction = async (req, res) => {
         const userRef = doc(db, "users", userId);
         const savingsCollectionRef = collection(userRef, "savings");
         const savingRef = doc(savingsCollectionRef, savingId);
-        
+
         const savingSnapshot = await getDoc(savingRef);
         if (!savingSnapshot.exists()) {
             return res.status(404).send({ error: 'Saving not found.' });
@@ -165,7 +222,7 @@ export const deleteTransaction = async (req, res) => {
 
         let transactionRef = null;
         let transactionCollectionRef = null;
-        
+
         transactionCollectionRef = collection(savingRef, "addition");
         transactionRef = doc(transactionCollectionRef, transactionId);
         const transactionSnapshot = await getDoc(transactionRef);
@@ -177,7 +234,7 @@ export const deleteTransaction = async (req, res) => {
 
         transactionCollectionRef = collection(savingRef, "reduction");
         transactionRef = doc(transactionCollectionRef, transactionId);
-        
+
         const transactionSnapshotReduction = await getDoc(transactionRef);
 
         if (transactionSnapshotReduction.exists()) {
@@ -186,7 +243,7 @@ export const deleteTransaction = async (req, res) => {
         }
 
         return res.status(404).send({ error: 'Transaction not found in "addition" or "reduction" collections.' });
-        
+
     } catch (error) {
         console.error("Error deleting transaction: ", error);
         res.status(500).send({ error: "Error deleting transaction!" });
@@ -222,12 +279,12 @@ export const updateSaving = async (req, res) => {
         let updatedAmount;
 
         if (actionType === 'add') {
-            updatedAmount = existingData.amount + amount; 
+            updatedAmount = existingData.amount + amount;
         } else if (actionType === 'reduce') {
             if (existingData.amount < amount) {
                 return res.status(400).send({ error: 'Insufficient saving amount to reduce.' });
             }
-            updatedAmount = existingData.amount - amount; 
+            updatedAmount = existingData.amount - amount;
         }
 
         const updatedData = {
