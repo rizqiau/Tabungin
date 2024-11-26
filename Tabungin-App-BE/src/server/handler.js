@@ -121,10 +121,16 @@ export const getSavings = async (req, res) => {
         const savingDoc = savingsSnapshot.docs[0];
         const savingRef = doc(savingsCollectionRef, savingDoc.id);
 
-        const transactionsCollectionRef = collection(savingRef, "transactions");
-        const transactionsSnapshot = await getDocs(transactionsCollectionRef);
+        const additionCollectionRef = collection(savingRef, "addition");
+        const additionsSnapshot = await getDocs(additionCollectionRef);
+        const additions = additionsSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
 
-        const transactions = transactionsSnapshot.docs.map((doc) => ({
+        const reductionCollectionRef = collection(savingRef, "reduction");
+        const reductionsSnapshot = await getDocs(reductionCollectionRef);
+        const reductions = reductionsSnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
         }));
@@ -133,8 +139,10 @@ export const getSavings = async (req, res) => {
 
         res.json({
             id: savingDoc.id,
-            ...savingData,
-            transactions,
+            userId,
+            amount: savingData.amount,
+            additions: additions,
+            reductions: reductions,
         });
     } catch (e) {
         console.error("Error getting savings: ", e);
@@ -165,8 +173,8 @@ export const updateSaving = async (req, res) => {
         const savingRef = doc(savingsCollectionRef, savingDoc.id);
 
         const existingData = savingDoc.data();
-
         const updatedAmount = existingData.amount + amount;
+
         const updatedData = {
             amount: updatedAmount,
             updatedAt: new Date(),
@@ -174,15 +182,14 @@ export const updateSaving = async (req, res) => {
 
         await updateDoc(savingRef, updatedData);
 
-        const transactionsCollectionRef = collection(savingRef, "transactions");
-        const transactionData = {
+        const additionCollectionRef = collection(savingRef, "addition");
+        const additionData = {
             amount,
             description,
-            type: "addition",
             createdAt: new Date(),
         };
 
-        await addDoc(transactionsCollectionRef, transactionData);
+        await addDoc(additionCollectionRef, additionData);
 
         const goalsCollectionRef = collection(savingRef, "goals");
         const goalsSnapshot = await getDocs(goalsCollectionRef);
@@ -202,7 +209,7 @@ export const updateSaving = async (req, res) => {
                 id: savingDoc.id,
                 userId,
                 ...updatedData,
-                transaction: transactionData,
+                transaction: additionData,
             },
         });
     } catch (error) {
@@ -210,7 +217,6 @@ export const updateSaving = async (req, res) => {
         res.status(500).send({ error: 'Error updating saving!' });
     }
 };
-
 
 export const reduceSaving = async (req, res) => {
     try {
@@ -247,15 +253,14 @@ export const reduceSaving = async (req, res) => {
 
         await updateDoc(savingRef, updatedData);
 
-        const transactionsCollectionRef = collection(savingRef, "transactions");
-        const transactionData = {
+        const reductionCollectionRef = collection(savingRef, "reduction");
+        const reductionData = {
             amount,
             description,
-            type: "reduction",
             createdAt: new Date(),
         };
 
-        await addDoc(transactionsCollectionRef, transactionData);
+        await addDoc(reductionCollectionRef, reductionData);
 
         const goalsCollectionRef = collection(savingRef, "goals");
         const goalsSnapshot = await getDocs(goalsCollectionRef);
@@ -275,7 +280,7 @@ export const reduceSaving = async (req, res) => {
                 id: savingDoc.id,
                 userId,
                 ...updatedData,
-                transaction: transactionData,
+                transaction: reductionData,
             },
         });
     } catch (error) {
