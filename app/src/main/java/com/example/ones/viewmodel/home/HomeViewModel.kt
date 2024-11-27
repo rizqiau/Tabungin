@@ -3,8 +3,12 @@ package com.example.ones.viewmodel.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.ones.R
 import com.example.ones.data.model.LatestEntry
+import com.example.ones.data.remote.response.Article
+import com.example.ones.data.repository.NewsRepository
+import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
 
@@ -34,4 +38,34 @@ class HomeViewModel : ViewModel() {
         )
     }
     val latestEntries: LiveData<List<LatestEntry>> = _latestEntries
+
+    private val repository = NewsRepository()
+
+    private val _articles = MutableLiveData<List<Article>>()
+    val articles: LiveData<List<Article>> get() = _articles
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?> get() = _error
+
+    init {
+        fetchTopHeadlines("us", "business", "e4732fddfae14b91af7072a3566a4c0b")
+    }
+
+    private fun fetchTopHeadlines(country: String, category: String, apiKey: String) {
+        _isLoading.value = true
+        viewModelScope.launch {
+            try {
+                val response = repository.getTopHeadlines(country, category, apiKey)
+                _articles.value = response.articles
+                _error.value = null
+            } catch (e: Exception) {
+                _error.value = e.message
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
 }

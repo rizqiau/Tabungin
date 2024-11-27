@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.ones.ui.savings.fragments.SavingsFragment"
-        android:label="@string/title_savings"
-        tools:layout="@layout/fragment_savings" />
+        android:id="@+id/navigation_transaction"
+        android:name="com.example.ones.ui.transaction.fragments.TransactionFragment"
+        android:label="@string/transaction"
+        tools:layout="@layout/fragment_transaction" />
 
     <fragment
         android:id="@+id/navigation_settings"
@@ -28,4 +28,10 @@
         android:name="com.example.ones.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile"/>
+
+    <fragment
+        android:id="@+id/navigation_add_transaction"
+        android:name="com.example.ones.ui.transaction.fragments.AddTransactionFragment"
+        android:label="@string/add_transaction"
+        tools:layout="@layout/fragment_add_transaction" />
 </navigation>

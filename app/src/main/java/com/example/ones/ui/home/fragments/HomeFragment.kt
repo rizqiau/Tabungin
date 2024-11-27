@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +13,7 @@ import com.example.ones.data.model.LatestEntry
 import com.example.ones.data.model.SummaryCard
 import com.example.ones.databinding.FragmentHomeBinding
 import com.example.ones.ui.home.adapters.LatestEntriesAdapter
+import com.example.ones.ui.home.adapters.NewsAdapter
 import com.example.ones.ui.home.adapters.SummaryCardAdapter
 import com.example.ones.viewmodel.home.HomeViewModel
 
@@ -23,19 +24,23 @@ class HomeFragment : Fragment() {
 
     private lateinit var summaryAdapter: SummaryCardAdapter
     private lateinit var entriesAdapter: LatestEntriesAdapter
+    private lateinit var newsAdapter: NewsAdapter
+
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         setupSummaryCards()
         setupLatestEntries()
+        setupNewsRecyclerView()
+
+        observeNews()
 
         return binding.root
     }
@@ -55,18 +60,29 @@ class HomeFragment : Fragment() {
                 isSelected = true // Highlighted
             ),
             SummaryCard(
-                title = "Monthly Expense",
+                title = "Total Savings",
                 amount = "$3,388.00",
                 iconResId = R.drawable.ic_wallet,
                 isSelected = false
             )
         )
 
-        summaryAdapter = SummaryCardAdapter(summaryItems)
+        // Setup adapter with click listener
+        summaryAdapter = SummaryCardAdapter(summaryItems).apply {
+            onItemClicked = { position ->
+                // Update the selected item
+                summaryItems.forEachIndexed { index, item ->
+                    item.isSelected = index == position
+                }
+                summaryAdapter.notifyDataSetChanged() // Refresh RecyclerView
+            }
+        }
+
         binding.rvSummaryCards.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvSummaryCards.adapter = summaryAdapter
     }
+
 
     private fun setupLatestEntries() {
         val latestEntries = listOf(
@@ -96,6 +112,30 @@ class HomeFragment : Fragment() {
         entriesAdapter = LatestEntriesAdapter(latestEntries)
         binding.rvLatestEntries.layoutManager = LinearLayoutManager(requireContext())
         binding.rvLatestEntries.adapter = entriesAdapter
+    }
+
+    private fun setupNewsRecyclerView() {
+        newsAdapter = NewsAdapter()
+        binding.rvNews.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvNews.adapter = newsAdapter
+    }
+
+    private fun observeNews() {
+        homeViewModel.articles.observe(viewLifecycleOwner) { articles ->
+            newsAdapter.submitList(articles)
+        }
+
+        homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        homeViewModel.error.observe(viewLifecycleOwner) { error ->
+            error?.let {
+                // Tampilkan error ke user
+                Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onDestroyView() {
