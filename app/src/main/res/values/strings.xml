@@ -29,4 +29,12 @@
     <string name="budget">budget</string>
     <string name="latest_entries">Latest Entries</string>
     <string name="entry_icon">entry_icon</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="tema">Tema</string>
+    <string name="language">Bahasa</string>
+    <string name="images">user</string>
+    <string name="images_name">username</string>
+    <string name="notification">Notification</string>
+    <string name="logout">Logout</string>
+    <string name="help">Help</string>
 </resources>
