@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.viewpager2:viewpager2:1.1.0-beta02@aar" external-system-id="GRADLE">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/../../Ones/Tabungin/caches/8.9/transforms/3ad6d071bc4796646a14f7f25a4d1be3/transformed/viewpager2-1.1.0-beta02/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../Ones/Tabungin/caches/8.9/transforms/3ad6d071bc4796646a14f7f25a4d1be3/transformed/viewpager2-1.1.0-beta02/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/../../Ones/Tabungin/caches/8.9/transforms/3ad6d071bc4796646a14f7f25a4d1be3/transformed/viewpager2-1.1.0-beta02/res" />
+      <root url="jar://$PROJECT_DIR$/../../Ones/Tabungin/caches/8.9/transforms/3ad6d071bc4796646a14f7f25a4d1be3/transformed/viewpager2-1.1.0-beta02/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Ones/Tabungin/caches/modules-2/files-2.1/androidx.viewpager2/viewpager2/1.1.0-beta02/e6b214fdb6728bde9ce154c610dfb1388658cad7/viewpager2-1.1.0-beta02-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

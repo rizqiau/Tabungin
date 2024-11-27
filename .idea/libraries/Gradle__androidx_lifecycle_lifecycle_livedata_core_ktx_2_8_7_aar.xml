@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.7@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../Ones/Tabungin/caches/8.9/transforms/a6b23fa4be47aed2dfba45fd79f6dd8d/transformed/lifecycle-livedata-core-ktx-2.8.7/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../Ones/Tabungin/caches/8.9/transforms/a6b23fa4be47aed2dfba45fd79f6dd8d/transformed/lifecycle-livedata-core-ktx-2.8.7/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../Ones/Tabungin/caches/8.9/transforms/a6b23fa4be47aed2dfba45fd79f6dd8d/transformed/lifecycle-livedata-core-ktx-2.8.7/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Ones/Tabungin/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-livedata-core-ktx/2.8.7/2ad14aed781c4a73ed4dbb421966d408a0a06686/lifecycle-livedata-core-ktx-2.8.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

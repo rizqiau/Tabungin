@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.navigation:navigation-fragment:2.8.4@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../Ones/Tabungin/caches/8.9/transforms/b0e47f6422ada0c986803c4682c6869b/transformed/navigation-fragment-2.8.4/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../../Ones/Tabungin/caches/8.9/transforms/b0e47f6422ada0c986803c4682c6869b/transformed/navigation-fragment-2.8.4/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../Ones/Tabungin/caches/8.9/transforms/b0e47f6422ada0c986803c4682c6869b/transformed/navigation-fragment-2.8.4/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../Ones/Tabungin/caches/modules-2/files-2.1/androidx.navigation/navigation-fragment/2.8.4/c39253045a35eef580d69dad78b2328748bf53f0/navigation-fragment-2.8.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
