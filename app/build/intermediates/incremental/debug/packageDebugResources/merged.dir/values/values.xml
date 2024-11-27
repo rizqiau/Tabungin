@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="backgroundColorDark">#121212</color>
+    <color name="backgroundColorLight">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="dividerColorDark">#333333</color>
+    <color name="dividerColorLight">#E0E0E0</color>
+    <color name="errorColorDark">#FF6E6E</color>
+    <color name="errorColorLight">#FF4D4D</color>
+    <color name="gray">#474747</color>
+    <color name="green">#4CAF50</color>
+    <color name="primaryColor">#0057FF</color>
+    <color name="primaryColorDark">#66B2FF</color>
+    <color name="primaryColorLight">#80AFFF</color>
+    <color name="primaryColorVariantDark">#0047C0</color>
+    <color name="red">#F44336</color>
+    <color name="surfaceColorDark">#1E1E1E</color>
+    <color name="surfaceColorLight">#F5F5F5</color>
+    <color name="textPrimaryDark">#FFFFFF</color>
+    <color name="textPrimaryLight">#000000</color>
+    <color name="textSecondaryDark">#B3B3B3</color>
+    <color name="textSecondaryLight">#666666</color>
+    <color name="white">#ffffff</color>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">8dp</dimen>
+    <string name="add">add</string>
+    <string name="add_button_description">Add new item</string>
+    <string name="add_transaction">Add Transaction</string>
+    <string name="app_name">Tabungin</string>
+    <string name="back">back</string>
+    <string name="back_to_login">BACK TO LOGIN</string>
+    <string name="budget">budget</string>
+    <string name="continue_apple">continue_apple</string>
+    <string name="continue_google">continue_google</string>
+    <string name="create_account">Create Account</string>
+    <string name="create_password">Create Your New Password</string>
+    <string name="create_password_desc">Your new password must be different from previous password.</string>
+    <string name="email">Email</string>
+    <string name="entry_icon">entry_icon</string>
+    <string name="fab">fab</string>
+    <string name="forgot_password">forgot_password</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="latest_entries">Latest Entries</string>
+    <string name="login">login</string>
+    <string name="logo">logo</string>
+    <string name="news">News</string>
+    <string name="next_month">Next Month</string>
+    <string name="password">password</string>
+    <string name="password_updated">Password Updated!!</string>
+    <string name="password_updated_desc">Your password has been setup successfully</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="previous_month">Previous Month</string>
+    <string name="profile_picture">profile_picture</string>
+    <string name="remind">remind</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="title_home">Home</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_savings">Saving</string>
+    <string name="title_settings">Settings</string>
+    <string name="total_expenses">Total Expenses</string>
+    <string name="transaction">Transaction</string>
+    <string name="transaction_history">Transaction History</string>
+    <string name="username">username</string>
+    <string name="your_balance">Your Balance</string>
+    <style name="Theme.Ones" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryColorLight</item>
+        <item name="android:windowBackground">@color/backgroundColorLight</item>
+        <item name="colorSurface">@color/surfaceColorLight</item>
+        <item name="colorError">@color/errorColorLight</item>
+        <item name="colorOnPrimary">@color/backgroundColorLight</item>
+        <item name="colorOnSurface">@color/textPrimaryLight</item>
+        <item name="colorOnBackground">@color/textSecondaryLight</item>
+
+        
+        <item name="android:textColor">@color/textPrimaryLight</item>
+        <item name="android:textColorSecondary">@color/textSecondaryLight</item>
+        <item name="dividerColor">@color/dividerColorLight</item>
+        <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
+    </style>
+    <style name="Theme.Ones.Splash" parent="Theme.SplashScreen">
+        
+        <item name="windowSplashScreenBackground">@color/white</item>
+        
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
+        
+        <item name="postSplashScreenTheme">@style/Theme.Ones</item>
+    </style>
+</resources>

@@ -1,0 +1,86 @@
+[
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\fragment_forgot_password.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_forgot_password.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\fragment_onboarding.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_onboarding.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\fragment_create_password.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_create_password.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\item_summary_view.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\item_summary_view.xml"
+    },
+    {
+        "merged": "com.example.ones.app-mergeDebugResources-51:/layout/fragment_transaction_savings.xml",
+        "source": "com.example.ones.app-main-54:/layout/fragment_transaction_savings.xml"
+    },
+    {
+        "merged": "com.example.ones.app-mergeDebugResources-51:/layout/fragment_add_transaction.xml",
+        "source": "com.example.ones.app-main-54:/layout/fragment_add_transaction.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\item_news.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\item_news.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\fragment_signup.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_signup.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\activity_onboarding.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\activity_onboarding.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\fragment_home.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "com.example.ones.app-mergeDebugResources-51:/layout/fragment_transaction_income.xml",
+        "source": "com.example.ones.app-main-54:/layout/fragment_transaction_income.xml"
+    },
+    {
+        "merged": "com.example.ones.app-mergeDebugResources-51:/layout/fragment_transaction_outcome.xml",
+        "source": "com.example.ones.app-main-54:/layout/fragment_transaction_outcome.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\item_latest_entry.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\item_latest_entry.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\fragment_settings.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_settings.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\fragment_transaction.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_transaction.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\activity_auth.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\activity_auth.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\fragment_savings.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_savings.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\activity_main.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\fragment_login.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_login.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\item_summary_card.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\item_summary_card.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-mergeDebugResources-51:\\layout\\fragment_profile.xml",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_profile.xml"
+    }
+]

@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.ones.app-mergeDebugResources-50:/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\caches\\8.9\\transforms\\5c71749f209607fd528dab999f408e53\\transformed\\appcompat-1.7.0\\res\\values-port\\values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}

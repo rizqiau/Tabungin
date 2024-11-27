@@ -1,0 +1,254 @@
+[
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_circle_background.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\circle_background.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_fragment_profile.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_next.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_next.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_fragment_forgot_password.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_forgot_password.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_shopping.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_shopping.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_back.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_back.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_password_updated.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_password_updated.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_google.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_google.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_user.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_user.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_fragment_home.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "com.example.ones.app-debug-52:/navigation_mobile_navigation.xml.flat",
+        "source": "com.example.ones.app-main-54:/navigation/mobile_navigation.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_fragment_savings.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_savings.xml"
+    },
+    {
+        "merged": "com.example.ones.app-debug-52:/layout_fragment_transaction_savings.xml.flat",
+        "source": "com.example.ones.app-main-54:/layout/fragment_transaction_savings.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_logo.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_logo.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_item_summary_view.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\item_summary_view.xml"
+    },
+    {
+        "merged": "com.example.ones.app-debug-52:/layout_fragment_add_transaction.xml.flat",
+        "source": "com.example.ones.app-main-54:/layout/fragment_add_transaction.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_account_circle_black_24dp.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_account_circle_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_item_summary_card.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\item_summary_card.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_note.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_note.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\xml_backup_rules.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_baseline_settings_24.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\baseline_settings_24.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_notifications_black_24dp.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_notifications_black_24dp.xml"
+    },
+    {
+        "merged": "com.example.ones.app-debug-52:/layout_fragment_transaction_outcome.xml.flat",
+        "source": "com.example.ones.app-main-54:/layout/fragment_transaction_outcome.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_fragment_create_password.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_create_password.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_home_black_24dp.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_home_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_fragment_settings.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_settings.xml"
+    },
+    {
+        "merged": "com.example.ones.app-debug-52:/layout_fragment_transaction_income.xml.flat",
+        "source": "com.example.ones.app-main-54:/layout/fragment_transaction_income.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\menu_bottom_nav_menu.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\menu\\bottom_nav_menu.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_placeholder.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_placeholder.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_arrow_up.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_arrow_up.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_activity_onboarding.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\activity_onboarding.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_email.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_email.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_item_latest_entry.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\item_latest_entry.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_fragment_transaction.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_transaction.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_item_news.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\item_news.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_activity_main.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_arrow_down.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_arrow_down.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_apple.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_apple.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_activity_auth.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\activity_auth.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_fragment_login.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_login.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_dashboard_black_24dp.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_dashboard_black_24dp.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\navigation_mobile_navigation.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\navigation\\mobile_navigation.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_add.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_add.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_fragment_signup.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_signup.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_wallet.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_wallet.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\drawable_ic_lock.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\drawable\\ic_lock.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\navigation_auth_nav_graph.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\navigation\\auth_nav_graph.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\layout_fragment_onboarding.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\layout\\fragment_onboarding.xml"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-debug-52:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\FutureCareer\\Bangkit\\Ones\\Tabungin\\daemon\\8.9\\com.example.ones.app-main-54:\\xml\\data_extraction_rules.xml"
+    }
+]
