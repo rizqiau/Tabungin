@@ -37,4 +37,5 @@
     <string name="notification">Notification</string>
     <string name="logout">Logout</string>
     <string name="help">Help</string>
+    <string name="save">save</string>
 </resources>
