@@ -21,6 +21,7 @@ gson = "2.10.1"
 okhttp = "4.11.0"
 converter-gson = "2.9.0"
 glide = "4.16.0"
+datastore-preferences = "1.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +46,7 @@ gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converter-gson" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore-preferences" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

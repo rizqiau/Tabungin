@@ -60,6 +60,7 @@ dependencies {
     implementation (libs.logging.interceptor)
     implementation (libs.gson)
     implementation (libs.glide)
+    implementation(libs.datastore.preferences)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
