@@ -2,7 +2,10 @@
 <!-- colors.xml -->
 <resources>
     <color name="white">#ffffff</color>
-    <color name="gray">#EBEEF0</color>
+    <color name="gray">#474747</color>
+    <color name="black">#000000</color>
+    <color name="red">#F44336</color>
+    <color name="green">#4CAF50</color>
     <!-- Light Mode Colors -->
     <color name="primaryColor">#0057FF</color> <!-- Button dan highlight -->
     <color name="primaryColorLight">#80AFFF</color> <!-- Disabled states -->
