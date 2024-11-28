@@ -1,10 +1,11 @@
 import {
     getSavings,
     updateSaving,
-    reduceSaving,
+    deleteTransaction,
     addUser,
     loginUser,
-    getUsers,
+    getUser,
+    deleteUser,
     addGoal,
     getGoals,
     updateGoal,
@@ -17,11 +18,12 @@ const routes = express.Router();
 
 routes.post("/users", addUser);
 routes.post("/login", loginUser);
-routes.get("/users", authenticate, getUsers);
+routes.get("/users/:userId", authenticate, getUser);
+routes.delete("/users/:userId", authenticate, deleteUser);
 
 routes.get("/savings/:userId", authenticate, getSavings);
 routes.put("/savings/:userId", authenticate, updateSaving);
-routes.put("/savings/reduce/:userId", authenticate, reduceSaving);
+routes.delete("/savings/:userId/:savingId/:transactionId", authenticate, deleteTransaction);
 
 routes.post("/goals/:userId/:savingId", authenticate, addGoal);
 routes.get("/goals/:userId/:savingId", authenticate, getGoals);

@@ -1,0 +1,22 @@
+package com.example.ones.data.remote.api
+
+import com.example.ones.data.remote.request.LoginRequest
+import com.example.ones.data.remote.response.LoginResponse
+import com.example.ones.data.remote.response.NewsResponse
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
+
+interface ApiService {
+
+    @GET("v2/top-headlines")
+    suspend fun getTopHeadlines(
+        @Query("country") country: String,
+        @Query("category") category: String,
+        @Query("apiKey") apiKey: String
+    ): NewsResponse
+
+    @POST("auth/login")
+    suspend fun login(@Body loginRequest: LoginRequest): LoginResponse
+}

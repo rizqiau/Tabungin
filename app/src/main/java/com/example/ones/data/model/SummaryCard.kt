@@ -4,5 +4,5 @@ data class SummaryCard(
     val title: String,
     val amount: String,
     val iconResId: Int,
-    val isSelected: Boolean = false // Default tidak terpilih
+    var isSelected: Boolean = false // Default tidak terpilih
 )
