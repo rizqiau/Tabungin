@@ -21,11 +21,11 @@ class ProfileFragment : Fragment() {
         val cardNotification = view.findViewById<CardView>(R.id.card_notification)
         val cardLogout = view.findViewById<CardView>(R.id.card_logout)
 
-        // Navigasi ke EditProfileFragment saat Edit Profile diklik
+        // Navigasi ke EditProfileFragment.kt saat Edit Profile diklik
         cardEditProfile.setOnClickListener {
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
 
-            // Panggil fragment EditProfileFragment langsung tanpa parameter
+
             transaction.replace(R.id.nav_host_fragment_activity_main, EditProfileFragment())
             transaction.addToBackStack(null)
             transaction.commit()
