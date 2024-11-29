@@ -15,6 +15,7 @@ import com.example.ones.databinding.FragmentHomeBinding
 import com.example.ones.ui.home.adapters.LatestEntriesAdapter
 import com.example.ones.ui.home.adapters.NewsAdapter
 import com.example.ones.ui.home.adapters.SummaryCardAdapter
+import com.example.ones.utils.ViewModelFactory
 import com.example.ones.viewmodel.home.HomeViewModel
 
 class HomeFragment : Fragment() {
@@ -33,14 +34,16 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        val factory = ViewModelFactory.getInstance(requireContext()) // Gunakan ViewModelFactory yang sudah disesuaikan
+        homeViewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         setupSummaryCards()
-        setupLatestEntries()
+        setupLatestEntries() // This will now use dynamic data from ViewModel
         setupNewsRecyclerView()
 
         observeNews()
+        observeSavingsData() // Observe savings data to update LatestEntries
 
         return binding.root
     }
@@ -83,33 +86,9 @@ class HomeFragment : Fragment() {
         binding.rvSummaryCards.adapter = summaryAdapter
     }
 
-
+    // Setup RecyclerView for Latest Entries (Tabungan)
     private fun setupLatestEntries() {
-        val latestEntries = listOf(
-            LatestEntry(
-                iconResId = R.drawable.ic_shopping,
-                title = "Food",
-                date = "20 Feb 2024",
-                amount = "+ $20 + Vat 0.5%",
-                paymentInfo = "Google Pay"
-            ),
-            LatestEntry(
-                iconResId = R.drawable.ic_shopping,
-                title = "Uber",
-                date = "13 Mar 2024",
-                amount = "- $18 + Vat 0.8%",
-                paymentInfo = "Cash"
-            ),
-            LatestEntry(
-                iconResId = R.drawable.ic_shopping,
-                title = "Shopping",
-                date = "11 Mar 2024",
-                amount = "- $400 + Vat 0.12%",
-                paymentInfo = "Paytm"
-            )
-        )
-
-        entriesAdapter = LatestEntriesAdapter(latestEntries)
+        entriesAdapter = LatestEntriesAdapter(emptyList()) // Start with empty list
         binding.rvLatestEntries.layoutManager = LinearLayoutManager(requireContext())
         binding.rvLatestEntries.adapter = entriesAdapter
     }
@@ -121,9 +100,10 @@ class HomeFragment : Fragment() {
         binding.rvNews.adapter = newsAdapter
     }
 
-    private fun observeNews() {
-        homeViewModel.articles.observe(viewLifecycleOwner) { articles ->
-            newsAdapter.submitList(articles)
+    // Observing the savings data (tabungan) from ViewModel
+    private fun observeSavingsData() {
+        homeViewModel.latestEntries.observe(viewLifecycleOwner) { latestEntries ->
+            entriesAdapter.submitList(latestEntries) // Update the RecyclerView with dynamic data
         }
 
         homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
@@ -137,6 +117,25 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    // Observing the news data
+    private fun observeNews() {
+        homeViewModel.articles.observe(viewLifecycleOwner) { articles ->
+            newsAdapter.submitList(articles)
+        }
+
+        homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        homeViewModel.error.observe(viewLifecycleOwner) { error ->
+            error?.let {
+                // Menampilkan error ke user
+                Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

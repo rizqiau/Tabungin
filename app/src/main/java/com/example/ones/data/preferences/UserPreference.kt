@@ -9,10 +9,7 @@ import androidx.datastore.preferences.core.edit
 import com.example.ones.data.model.UserModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.util.prefs.Preferences
-
-// Menggunakan preferencesDataStore ekstensi untuk mendefinisikan dataStore
-import androidx.datastore.preferences.core.Preferences as DataStorePreferences // Menggunakan alias
+import androidx.datastore.preferences.core.Preferences as DataStorePreferences
 
 val Context.dataStore: DataStore<DataStorePreferences> by preferencesDataStore(name = "session")
 
@@ -21,6 +18,7 @@ class UserPreference private constructor(private val dataStore: DataStore<DataSt
         dataStore.edit { preferences ->
             preferences[EMAIL_KEY] = user.email
             preferences[TOKEN_KEY] = user.token
+            preferences[USER_ID_KEY] = user.userId  // Menambahkan userId
             preferences[IS_LOGIN_KEY] = true
         }
     }
@@ -30,6 +28,7 @@ class UserPreference private constructor(private val dataStore: DataStore<DataSt
             UserModel(
                 preferences[EMAIL_KEY] ?: "",
                 preferences[TOKEN_KEY] ?: "",
+                preferences[USER_ID_KEY] ?: "",  // Mengambil userId
                 preferences[IS_LOGIN_KEY] ?: false
             )
         }
@@ -45,6 +44,7 @@ class UserPreference private constructor(private val dataStore: DataStore<DataSt
         @Volatile
         private var INSTANCE: UserPreference? = null
 
+        private val USER_ID_KEY = stringPreferencesKey("userId")
         private val EMAIL_KEY = stringPreferencesKey("email")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")

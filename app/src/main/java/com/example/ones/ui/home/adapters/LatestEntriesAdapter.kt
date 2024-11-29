@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ones.data.model.LatestEntry
 import com.example.ones.databinding.ItemLatestEntryBinding
 
-class LatestEntriesAdapter(private val items: List<LatestEntry>) :
+class LatestEntriesAdapter(private var items: List<LatestEntry>) :
     RecyclerView.Adapter<LatestEntriesAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemLatestEntryBinding) :
@@ -16,8 +16,13 @@ class LatestEntriesAdapter(private val items: List<LatestEntry>) :
             binding.tvTitle.text = item.title
             binding.tvDate.text = item.date
             binding.tvAmount.text = item.amount
-            binding.tvPaymentInfo.text = item.paymentInfo
         }
+    }
+
+    // Menambahkan fungsi untuk memperbarui data di adapter
+    fun submitList(newItems: List<LatestEntry>) {
+        items = newItems
+        notifyDataSetChanged()  // Memberitahu adapter untuk memperbarui tampilan
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -5,6 +5,5 @@ data class LatestEntry(
     val title: String,
     val date: String,
     val amount: String,
-    val paymentInfo: String
 )
 

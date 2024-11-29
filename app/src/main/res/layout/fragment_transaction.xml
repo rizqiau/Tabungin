@@ -34,15 +34,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="28sp"
-        android:text="200.000"
+        android:text="@string/total_balance"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/tvYourBalance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <include
-        android:id="@+id/cvSummaryCard"
-        layout="@layout/item_summary_view"
+        android:id="@+id/cvTotalTransaction"
+        layout="@layout/item_total_transaction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvBalance" />
@@ -55,7 +55,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:text="@string/transaction_history"
-        app:layout_constraintTop_toBottomOf="@id/cvSummaryCard"
+        app:layout_constraintTop_toBottomOf="@id/cvTotalTransaction"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -68,4 +68,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
