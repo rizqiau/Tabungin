@@ -28,3 +28,4 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 }
+

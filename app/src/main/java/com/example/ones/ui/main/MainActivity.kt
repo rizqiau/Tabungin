@@ -17,6 +17,7 @@ import com.example.ones.data.preferences.UserPreference
 import com.example.ones.data.preferences.dataStore
 import com.example.ones.databinding.ActivityMainBinding
 import com.example.ones.ui.auth.AuthActivity
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,10 +57,11 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.background = null
         bottomNavigationView.menu.getItem(2).isEnabled = false
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        // Perbaiki: hanya gunakan NavController jika berada di dalam MainActivity
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController: NavController = navHostFragment.navController
 
+        // Menangani aksi back press
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (navController.currentBackStackEntry?.destination?.id == R.id.navigation_home) {
@@ -70,6 +72,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        // Setup AppBar dengan navController
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
@@ -86,12 +89,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun navigateToAuth() {
         Intent(this, AuthActivity::class.java).also {
             startActivity(it)
             finish() // Hentikan MainActivity agar tidak kembali ke sini
         }
     }
+    private fun logout() {
+        lifecycleScope.launchWhenCreated {
+            userPreference.getSession().collect { user ->
+                if (!user.isLogin) {
+                    // Jika pengguna belum login, arahkan ke AuthActivity
+                    navigateToAuth()
+                } else {
+                    // Jika sudah login, lanjutkan ke MainActivity
+                    initMainActivity()
+                }
+            }
+        }
+
+    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
