@@ -37,3 +37,4 @@ class AuthActivity : AppCompatActivity() {
         transaction.commit()
     }
 }
+
