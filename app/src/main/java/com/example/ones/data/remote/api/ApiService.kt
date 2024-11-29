@@ -5,9 +5,12 @@ import com.example.ones.data.remote.request.RegisterRequest
 import com.example.ones.data.remote.response.LoginResponse
 import com.example.ones.data.remote.response.NewsResponse
 import com.example.ones.data.remote.response.RegisterResponse
+import com.example.ones.data.remote.response.SavingsResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -23,4 +26,10 @@ interface ApiService {
 
     @POST("auth/register")
     suspend fun registerUser(@Body request: RegisterRequest): RegisterResponse
+
+    @GET("savings/{userId}")
+    suspend fun getSavings(
+        @Path("userId") userId: String,
+        @Header("Authorization") token: String
+    ): SavingsResponse
 }

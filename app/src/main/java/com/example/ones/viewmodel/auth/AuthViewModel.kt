@@ -1,6 +1,5 @@
 package com.example.ones.viewmodel.auth
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,9 +24,11 @@ class AuthViewModel(private val userRepository: UserRepository) : ViewModel() {
             try {
                 val response = userRepository.login(email, password)
                 val token = response.data.user.stsTokenManager.accessToken
+                val userId = response.data.user.uid  // Mengambil userId dari response
                 val user = UserModel(
                     email = email,
                     token = token,
+                    userId = userId,  // Menyimpan userId
                     isLogin = true
                 )
                 userRepository.saveSession(user)
@@ -39,20 +40,16 @@ class AuthViewModel(private val userRepository: UserRepository) : ViewModel() {
     }
 
     fun register(name: String, email: String, password: String) {
-        Log.d("AuthViewModel", "Register function called")
         viewModelScope.launch {
             try {
                 val response = userRepository.register(name, email, password)
-                Log.d("AuthViewModel", "Response received: ${response.message}")
 
-                // Check if message contains "success" or something indicating success
                 if (response.message.contains("success", ignoreCase = true)) {
                     _signupResult.value = kotlin.Result.success(response.message)
                 } else {
                     _signupResult.value = kotlin.Result.failure(Exception(response.message))
                 }
             } catch (e: Exception) {
-                Log.e("AuthViewModel", "Error: ${e.message}", e)
                 _signupResult.value = kotlin.Result.failure(e)
             }
         }

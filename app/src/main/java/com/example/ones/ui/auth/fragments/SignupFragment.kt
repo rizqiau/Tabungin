@@ -10,11 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.ones.R
-import com.example.ones.data.model.Result
 import com.example.ones.databinding.FragmentSignupBinding
 import com.example.ones.ui.auth.AuthActivity
-import com.example.ones.ui.main.MainActivity
 import com.example.ones.utils.ViewModelFactory
 import com.example.ones.viewmodel.auth.AuthViewModel
 
