@@ -4,7 +4,9 @@ import com.example.ones.data.model.UserModel
 import com.example.ones.data.preferences.UserPreference
 import com.example.ones.data.remote.api.ApiService
 import com.example.ones.data.remote.request.LoginRequest
+import com.example.ones.data.remote.request.RegisterRequest
 import com.example.ones.data.remote.response.LoginResponse
+import com.example.ones.data.remote.response.RegisterResponse
 import kotlinx.coroutines.flow.Flow
 
 class UserRepository(
@@ -15,6 +17,10 @@ class UserRepository(
     suspend fun login(email: String, password: String): LoginResponse {
         val request = LoginRequest(email, password)
         return apiService.login(request)
+    }
+
+    suspend fun register(name: String, email: String, password: String): RegisterResponse {
+        return apiService.registerUser(RegisterRequest(name, email, password))
     }
 
     suspend fun saveSession(user: UserModel) {

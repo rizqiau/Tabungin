@@ -47,10 +47,9 @@
         <com.example.ones.ui.customview.EmailEditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:ems="10"
-            android:hint="@string/email"
-            android:textColorHint="?attr/colorOnSurfaceVariant" />
+            android:hint="@string/email" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Username Input -->
@@ -68,9 +67,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/usernameEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/username"
-            android:textColorHint="?attr/colorOnSurfaceVariant" />
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:hint="@string/username" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Password Input -->
@@ -88,11 +87,10 @@
         <com.example.ones.ui.customview.PasswordEditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:hint="@string/password"
             android:ems="10"
-            android:inputType="textPassword"
-            android:textColorHint="?attr/colorOnSurfaceVariant" />
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Password Requirements -->

@@ -1,5 +1,6 @@
 package com.example.ones.viewmodel.auth
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +15,9 @@ class AuthViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     private val _loginResult = MutableLiveData<Result<LoginResponse>>()
     val loginResult: LiveData<Result<LoginResponse>> = _loginResult
+
+    private val _signupResult = MutableLiveData<kotlin.Result<String>>()
+    val signupResult: LiveData<kotlin.Result<String>> = _signupResult
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
@@ -30,6 +34,26 @@ class AuthViewModel(private val userRepository: UserRepository) : ViewModel() {
                 _loginResult.value = Result.Success(response)
             } catch (e: Exception) {
                 _loginResult.value = Result.Error(e.message ?: "Terjadi kesalahan")
+            }
+        }
+    }
+
+    fun register(name: String, email: String, password: String) {
+        Log.d("AuthViewModel", "Register function called")
+        viewModelScope.launch {
+            try {
+                val response = userRepository.register(name, email, password)
+                Log.d("AuthViewModel", "Response received: ${response.message}")
+
+                // Check if message contains "success" or something indicating success
+                if (response.message.contains("success", ignoreCase = true)) {
+                    _signupResult.value = kotlin.Result.success(response.message)
+                } else {
+                    _signupResult.value = kotlin.Result.failure(Exception(response.message))
+                }
+            } catch (e: Exception) {
+                Log.e("AuthViewModel", "Error: ${e.message}", e)
+                _signupResult.value = kotlin.Result.failure(e)
             }
         }
     }
