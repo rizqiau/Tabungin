@@ -2,10 +2,10 @@ package com.example.ones.data.remote.response
 
 data class LoginResponse(
     val message: String,
-    val data: UserData
+    val data: UserLoginData
 )
 
-data class UserData(
+data class UserLoginData(
     val user: UserDetail
 )
 
