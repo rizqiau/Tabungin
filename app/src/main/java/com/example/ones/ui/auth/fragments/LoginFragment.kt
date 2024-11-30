@@ -1,6 +1,7 @@
 package com.example.ones.ui.auth.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,7 +77,8 @@ class LoginFragment : Fragment() {
                 is Result.Error -> {
                     binding.loginButton.isEnabled = true
                     binding.loginButton.text = getString(R.string.login)
-                    Toast.makeText(requireContext(), "Error: ${result.error}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error login: ${result.error}", Toast.LENGTH_SHORT).show()
+                    Log.e("LoginFragment", "Error Fetch News")
                 }
             }
         }
