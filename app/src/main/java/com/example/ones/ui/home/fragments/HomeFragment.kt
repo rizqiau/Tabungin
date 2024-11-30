@@ -1,6 +1,7 @@
 package com.example.ones.ui.home.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -131,7 +132,8 @@ class HomeFragment : Fragment() {
         homeViewModel.error.observe(viewLifecycleOwner) { error ->
             error?.let {
                 // Menampilkan error ke user
-                Toast.makeText(requireContext(), "Error: $it", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error news: $it", Toast.LENGTH_SHORT).show()
+                Log.e("News", "Error Fetch News")
             }
         }
     }

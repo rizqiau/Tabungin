@@ -6,31 +6,41 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    private const val BASE_URL = "https://newsapi.org/"  // Base URL default
+    // Base URL untuk News API
+    private const val NEWS_BASE_URL = "https://newsapi.org/"
+
+    // Base URL untuk Auth dan Savings API
+    private const val SAVINGS_BASE_URL = "https://tabungin-api-66486896293.asia-southeast2.run.app/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    private val retrofit: Retrofit by lazy {
+    // Retrofit instance untuk News API
+    private val newsRetrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(BASE_URL)  // Base URL default
-            .addConverterFactory(GsonConverterFactory.create())  // Gson converter
+            .baseUrl(NEWS_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
             .client(OkHttpClient.Builder().addInterceptor(loggingInterceptor).build())
             .build()
     }
 
-    // ApiService digunakan untuk berita
-    val apiService: ApiService by lazy {
-        retrofit.create(ApiService::class.java)
+    // Retrofit instance untuk Auth dan Savings API
+    private val savingsRetrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(SAVINGS_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient.Builder().addInterceptor(loggingInterceptor).build())
+            .build()
     }
 
-    // Jika ingin menggunakan API untuk Savings, buat instance Retrofit berbeda dengan base URL yang sesuai
-    fun provideSavingsApiService(): ApiService {
-        val savingsRetrofit = retrofit.newBuilder()
-            .baseUrl("https://tabungin-api-66486896293.asia-southeast2.run.app/")  // Base URL untuk Savings API
-            .build()
+    // API service untuk News
+    val newsApiService: ApiService by lazy {
+        newsRetrofit.create(ApiService::class.java)
+    }
 
-        return savingsRetrofit.create(ApiService::class.java)
+    // API service untuk Auth dan Savings
+    val savingsApiService: ApiService by lazy {
+        savingsRetrofit.create(ApiService::class.java)
     }
 }
