@@ -3,9 +3,12 @@ package com.example.ones.utils
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.ones.data.preferences.UserPreference
+import com.example.ones.data.preferences.dataStore
 import com.example.ones.data.repository.NewsRepository
 import com.example.ones.data.repository.SavingsRepository
 import com.example.ones.data.repository.UserRepository
+import com.example.ones.di.Injection
 import com.example.ones.di.Injection.provideViewModelFactory
 import com.example.ones.viewmodel.auth.AuthViewModel
 import com.example.ones.viewmodel.home.HomeViewModel
@@ -14,7 +17,7 @@ import com.example.ones.viewmodel.transaction.TransactionViewModel
 class ViewModelFactory(
     private val userRepository: UserRepository,
     private val savingsRepository: SavingsRepository,
-    private val newsRepository: NewsRepository,
+    private val newsRepository: NewsRepository // NewsRepository untuk data berita
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -48,3 +51,4 @@ class ViewModelFactory(
         }
     }
 }
+

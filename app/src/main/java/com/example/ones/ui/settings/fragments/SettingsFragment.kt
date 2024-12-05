@@ -4,55 +4,35 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.example.ones.databinding.FragmentSettingsBinding
-import com.example.ones.viewmodel.settings.SettingsViewModel
+import androidx.navigation.fragment.findNavController
+import com.example.ones.R
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : Fragment(R.layout.fragment_settings) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    private var _binding: FragmentSettingsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(SettingsViewModel::class.java)
-
-        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val editProfileTextView = binding.tvEditProfile
-        editProfileTextView.setOnClickListener {
-            Toast.makeText(context, "Edit Profile clicked", Toast.LENGTH_SHORT).show()
-
+        // Profile CardView
+        val cardProfile = view.findViewById<CardView>(R.id.card_profile)
+        cardProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_profileFragment)
         }
 
-        val themeTextView = binding.tvTema
-        themeTextView.setOnClickListener {
-            Toast.makeText(context, "test thema", Toast.LENGTH_SHORT).show()
-
+        // Tema CardView
+        val cardTema = view.findViewById<CardView>(R.id.card_tema)
+        cardTema.setOnClickListener {
+            // Tambahkan navigasi ke fragment tema
         }
 
-        val languageTextView = binding.tvLanguage
-        languageTextView.setOnClickListener {
-            Toast.makeText(context, "test language nya", Toast.LENGTH_SHORT).show()
-
+        // Language CardView
+        val cardLanguage = view.findViewById<CardView>(R.id.card_language)
+        cardLanguage.setOnClickListener {
+            // Tambahkan navigasi ke fragment pengaturan bahasa
         }
 
-        return root
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
+

@@ -26,6 +26,7 @@ class AuthViewModel(private val userRepository: UserRepository) : ViewModel() {
                 val token = response.data.user.stsTokenManager.accessToken
                 val userId = response.data.user.uid  // Mengambil userId dari response
                 val user = UserModel(
+                    username = "username",
                     email = email,
                     token = token,
                     userId = userId,  // Menyimpan userId

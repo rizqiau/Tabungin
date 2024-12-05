@@ -22,3 +22,21 @@ data class Saving(
     val amount: Double,
     val createdAt: String
 )
+data class UpdateUserResponse(
+    val message: String,
+    val data: UserData
+)
+
+data class UserData(
+    val id: String,
+    val username: String,
+    val email: String,
+    val passwordHash: String,
+    val createdAt: TimeData,
+    val updatedAt: String
+)
+
+data class TimeData(
+    val seconds: Long,
+    val nanoseconds: Long
+)

@@ -1,14 +1,16 @@
 package com.example.ones.data.remote.api
 
-import com.example.ones.data.remote.request.AddSavingsRequest
 import com.example.ones.data.remote.request.LoginRequest
-import com.example.ones.data.remote.request.ReduceSavingsRequest
 import com.example.ones.data.remote.request.RegisterRequest
+import com.example.ones.data.remote.request.UpdateUserRequest
 import com.example.ones.data.remote.response.LoginResponse
 import com.example.ones.data.remote.response.NewsResponse
 import com.example.ones.data.remote.response.RegisterResponse
 import com.example.ones.data.remote.response.SavingsResponse
+import com.example.ones.data.remote.response.UpdateUserResponse
+import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -36,18 +38,15 @@ interface ApiService {
         @Header("Authorization") token: String
     ): SavingsResponse
 
-    @PUT("savings/{userId}/add")
-    suspend fun addSavings(
+    @DELETE("users/{userId}")
+    suspend fun deleteUser(
         @Path("userId") userId: String,
-        @Body request: AddSavingsRequest,
         @Header("Authorization") token: String
-    ): SavingsResponse
+    ): Response<Map<String, String>>
 
-    @PUT("savings/{userId}/reduce")
-    suspend fun reduceSavings(
+    @PUT("users/{userId}")
+    suspend fun updateUser(
         @Path("userId") userId: String,
-        @Body request: ReduceSavingsRequest,
-        @Header("Authorization") token: String
-    ): SavingsResponse
-
+        @Body updateRequest: UpdateUserRequest
+    ): Response<UpdateUserResponse>
 }

@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/homeFragment"
+        android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/transactionFragment"
+        android:id="@+id/navigation_transaction"
         android:icon="@drawable/ic_note"
         android:title="@string/transaction" />
 
@@ -16,12 +16,12 @@
         android:title=""/>
 
     <item
-        android:id="@+id/settingsFragment"
+        android:id="@+id/navigation_settings"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_settings" />
 
     <item
-        android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_account_circle_black_24dp"
-        android:title="@string/title_profile" />
+        android:id="@+id/navigation_history"
+        android:icon="@drawable/baseline_manage_history_24"
+    android:title="@string/History" />
 </menu>
