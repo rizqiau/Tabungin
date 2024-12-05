@@ -6,18 +6,14 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.ones.R
 import com.example.ones.data.preferences.UserPreference
 import com.example.ones.data.preferences.dataStore
 import com.example.ones.databinding.ActivityMainBinding
 import com.example.ones.ui.auth.AuthActivity
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,12 +55,14 @@ class MainActivity : AppCompatActivity() {
 
         // Perbaiki: hanya gunakan NavController jika berada di dalam MainActivity
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
-        val navController: NavController = navHostFragment.navController
+        val navController = navHostFragment.navController
+
+        bottomNavigationView.setupWithNavController(navController)
 
         // Menangani aksi back press
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (navController.currentBackStackEntry?.destination?.id == R.id.navigation_home) {
+                if (navController.currentBackStackEntry?.destination?.id == R.id.homeFragment) {
                     finish()
                 } else {
                     navController.navigateUp()
@@ -72,20 +70,8 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        // Setup AppBar dengan navController
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home,
-                R.id.navigation_transaction,
-                R.id.navigation_settings,
-                R.id.navigation_profile
-            )
-        )
-
-        bottomNavigationView.setupWithNavController(navController)
-
         binding.fabAdd.setOnClickListener {
-            navController.navigate(R.id.navigation_add_transaction)
+            navController.navigate(R.id.addTransactionFragment)
         }
     }
 
@@ -96,21 +82,6 @@ class MainActivity : AppCompatActivity() {
             finish() // Hentikan MainActivity agar tidak kembali ke sini
         }
     }
-    private fun logout() {
-        lifecycleScope.launchWhenCreated {
-            userPreference.getSession().collect { user ->
-                if (!user.isLogin) {
-                    // Jika pengguna belum login, arahkan ke AuthActivity
-                    navigateToAuth()
-                } else {
-                    // Jika sudah login, lanjutkan ke MainActivity
-                    initMainActivity()
-                }
-            }
-        }
-
-    }
-
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)

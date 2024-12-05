@@ -1,6 +1,8 @@
 package com.example.ones.data.remote.api
 
+import com.example.ones.data.remote.request.AddSavingsRequest
 import com.example.ones.data.remote.request.LoginRequest
+import com.example.ones.data.remote.request.ReduceSavingsRequest
 import com.example.ones.data.remote.request.RegisterRequest
 import com.example.ones.data.remote.response.LoginResponse
 import com.example.ones.data.remote.response.NewsResponse
@@ -10,6 +12,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -32,4 +35,19 @@ interface ApiService {
         @Path("userId") userId: String,
         @Header("Authorization") token: String
     ): SavingsResponse
+
+    @PUT("savings/{userId}/add")
+    suspend fun addSavings(
+        @Path("userId") userId: String,
+        @Body request: AddSavingsRequest,
+        @Header("Authorization") token: String
+    ): SavingsResponse
+
+    @PUT("savings/{userId}/reduce")
+    suspend fun reduceSavings(
+        @Path("userId") userId: String,
+        @Body request: ReduceSavingsRequest,
+        @Header("Authorization") token: String
+    ): SavingsResponse
+
 }
