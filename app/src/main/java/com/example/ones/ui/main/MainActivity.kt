@@ -2,6 +2,7 @@ package com.example.ones.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -49,6 +50,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Set BottomAppBar sebagai ActionBar
+        setSupportActionBar(binding.bottomAppbar)
+
         val bottomNavigationView =
             binding.bottomAppbar.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
                 R.id.bottomNavigationView
@@ -57,30 +61,36 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.background = null
         bottomNavigationView.menu.getItem(2).isEnabled = false
 
-        // Perbaiki: hanya gunakan NavController jika berada di dalam MainActivity
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController: NavController = navHostFragment.navController
 
-        // Menangani aksi back press
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (navController.currentBackStackEntry?.destination?.id == R.id.navigation_home) {
-                    finish()
-                } else {
-                    navController.navigateUp()
+        // Menyembunyikan Bottom Navigation di halaman tertentu
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_home,
+                R.id.navigation_transaction,
+                R.id.navigation_settings,
+                R.id.navigation_history -> {
+                    binding.bottomAppbar.visibility = View.VISIBLE
+                    binding.fabAdd.visibility = View.VISIBLE
+                }
+                else -> {
+                    binding.bottomAppbar.visibility = View.GONE
+                    binding.fabAdd.visibility = View.GONE
                 }
             }
-        })
+        }
 
-        // Setup AppBar dengan navController
+        // Setup AppBar dengan NavController
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
                 R.id.navigation_transaction,
                 R.id.navigation_settings,
-                R.id.navigation_profile
+                R.id.navigation_history
             )
         )
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
         bottomNavigationView.setupWithNavController(navController)
 
@@ -89,28 +99,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private fun navigateToAuth() {
         Intent(this, AuthActivity::class.java).also {
             startActivity(it)
             finish() // Hentikan MainActivity agar tidak kembali ke sini
         }
     }
-    private fun logout() {
-        lifecycleScope.launchWhenCreated {
-            userPreference.getSession().collect { user ->
-                if (!user.isLogin) {
-                    // Jika pengguna belum login, arahkan ke AuthActivity
-                    navigateToAuth()
-                } else {
-                    // Jika sudah login, lanjutkan ke MainActivity
-                    initMainActivity()
-                }
-            }
-        }
-
-    }
-
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)

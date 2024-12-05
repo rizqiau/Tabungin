@@ -6,31 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".ui.settings.fragments.SettingsFragment">
 
+    <!-- CardProfile moved to the top -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_edit_profile"
+        android:id="@+id/card_profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="24dp"
+        android:padding="8dp">
 
         <TextView
-            android:id="@+id/tv_edit_profile"
+            android:id="@+id/tv_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="@string/tema"
-            android:textSize="18sp"
+            android:text="@string/card_profile"
             android:textColor="@android:color/black"
+            android:textSize="18sp"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
-            app:drawableStartCompat="@drawable/baseline_mode_night_24" />
+            app:drawableStartCompat="@drawable/ic_account_circle_black_24dp" />
     </androidx.cardview.widget.CardView>
 
-    <!-- Second CardView -->
+    <!-- Second CardView (Tema) -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_tema"
         android:layout_width="0dp"
@@ -39,7 +41,7 @@
         app:cardElevation="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_edit_profile"
+        app:layout_constraintTop_toBottomOf="@id/card_profile"
         android:layout_marginTop="16dp"
         android:padding="8dp">
 
@@ -56,6 +58,7 @@
             app:drawableStartCompat="@drawable/baseline_abc_24" />
     </androidx.cardview.widget.CardView>
 
+    <!-- Third CardView (Language) -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_language"
         android:layout_width="0dp"
@@ -64,11 +67,9 @@
         app:cardElevation="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_tema"
+        app:layout_constraintTop_toBottomOf="@id/card_edit_profile"
         android:layout_marginTop="16dp"
         android:padding="8dp">
-
-
 
         <TextView
             android:id="@+id/tv_language"
@@ -82,5 +83,33 @@
             android:gravity="center_vertical"
             app:drawableStartCompat="@drawable/baseline_help_24" />
     </androidx.cardview.widget.CardView>
+
+    <!-- Fourth CardView (Edit Profile) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_edit_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_tema">
+
+        <TextView
+            android:id="@+id/tv_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/tema"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            app:drawableStartCompat="@drawable/baseline_mode_night_24" />
+    </androidx.cardview.widget.CardView>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,4 +63,9 @@
     <string name="saving">Saving</string>
     <string name="total_saving">2.575</string>
     <string name="total_outcome">152</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="new_password">New Password</string>
+    <string name="current_password">Current Pasword</string>
+    <string name="card_profile">Profile</string>
+    <string name="History">Riwayat</string>
 </resources>
