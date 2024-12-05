@@ -1,5 +1,6 @@
 package com.example.ones.viewmodel.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,11 +8,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.ones.R
 import com.example.ones.data.model.LatestEntry
 import com.example.ones.data.remote.response.Article
+import com.example.ones.data.remote.response.TransactionDate
 import com.example.ones.data.repository.NewsRepository
 import com.example.ones.data.repository.SavingsRepository
 import kotlinx.coroutines.launch
-import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class HomeViewModel(
     private val savingsRepository: SavingsRepository,
@@ -45,46 +48,67 @@ class HomeViewModel(
                 val response = savingsRepository.getSavingsData()
                 if (response != null) {
                     // Gabungkan additions dan reductions
-                    val allTransactions = mutableListOf<LatestEntry>()
+                    val allTransactionData = mutableListOf<LatestEntry>()
 
-                    // Mapping untuk additions
+                    // Menggabungkan transaksi dari additions
                     response.data.additions.forEach { addition ->
-                        allTransactions.add(
+                        allTransactionData.add(
                             LatestEntry(
-                                iconResId = R.drawable.ic_shopping,  // Ganti sesuai dengan ikon yang sesuai
+                                iconResId = R.drawable.ic_shopping,
                                 title = addition.description,
-                                date = DateFormat.getDateInstance().format(Date(addition.createdAt.seconds * 1000L)),
-                                amount = "+$${addition.amount}"  // Penambahan
+                                date = parseDateFromTransactionDate(addition.createdAt),
+                                amount = "+Rp${addition.amount}"
                             )
                         )
                     }
 
-                    // Mapping untuk reductions
+                    // Menggabungkan transaksi dari reductions
                     response.data.reductions.forEach { reduction ->
-                        allTransactions.add(
+                        allTransactionData.add(
                             LatestEntry(
-                                iconResId = R.drawable.ic_shopping,  // Ganti sesuai dengan ikon yang sesuai
+                                iconResId = R.drawable.ic_shopping,
                                 title = reduction.description,
-                                date = DateFormat.getDateInstance().format(Date(reduction.createdAt.seconds * 1000L)),
-                                amount = "-$${reduction.amount}"  // Pengurangan
+                                date = parseDateFromTransactionDate(reduction.createdAt),
+                                amount = "-Rp${reduction.amount}"
                             )
                         )
                     }
 
-                    // Set data transaksi yang sudah digabungkan
-                    _latestEntries.value = allTransactions
+                    // Urutkan transaksi berdasarkan waktu (terbaru di atas)
+                    allTransactionData.sortByDescending {
+                        Date(it.date).time // Urutkan berdasarkan waktu transaksi
+                    }
+
+                    _latestEntries.value = allTransactionData
                     _error.value = null
                 } else {
                     _error.value = "Failed to fetch savings data."
                 }
             } catch (e: Exception) {
                 _error.value = e.message // Menampilkan pesan error ke UI
+                Log.e("fetchSavingsData", "error")
             } finally {
                 _isLoading.value = false
             }
         }
     }
 
+    // HomeViewModel
+    fun refreshSavingsData() {
+        fetchSavingsData()  // Panggil ulang fungsi untuk mengambil data terbaru
+    }
+
+    private fun parseDateFromTransactionDate(transactionDate: TransactionDate): String {
+        // Mengonversi 'seconds' ke dalam milidetik
+        val milliseconds = transactionDate.seconds * 1000L + transactionDate.nanoseconds / 1000000L  // nanoseconds diubah ke milidetik
+
+        // Membuat objek Date menggunakan hasil konversi
+        val date = Date(milliseconds)
+
+        // Menggunakan SimpleDateFormat untuk memformat menjadi string yang lebih readable
+        val outputFormat = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
+        return outputFormat.format(date)
+    }
 
     // Fetching top headlines (News) from API
     private fun fetchTopHeadlines(country: String, category: String, apiKey: String) {

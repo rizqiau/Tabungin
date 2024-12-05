@@ -6,11 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Toast
-import com.example.ones.R
-import com.example.ones.databinding.FragmentTransactionIncomeBinding
 import com.example.ones.databinding.FragmentTransactionSavingsBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -26,19 +21,6 @@ class TransactionSavingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTransactionSavingsBinding.inflate(inflater, container, false)
-
-        val category = listOf("Shop", "Health", "Food")
-        val categoryInput : AutoCompleteTextView = binding.categoryInput
-        val adapter = ArrayAdapter(requireContext(), R.layout.item_category, category)
-
-        categoryInput.setAdapter(adapter)
-
-        categoryInput.setOnItemClickListener { adapterView, view, i, l ->
-            val categorySelected = adapterView.getItemAtPosition(i)
-            if (isAdded) { // Pastikan fragment terhubung ke aktivitas
-                Toast.makeText(requireContext(), "Item : $categorySelected", Toast.LENGTH_SHORT).show()
-            }
-        }
 
         binding.dateInput.setOnClickListener {
             showDatePicker()

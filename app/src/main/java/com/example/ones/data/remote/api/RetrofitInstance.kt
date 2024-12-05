@@ -10,7 +10,7 @@ object RetrofitInstance {
     private const val NEWS_BASE_URL = "https://newsapi.org/"
 
     // Base URL untuk Auth dan Savings API
-    private const val SAVINGS_BASE_URL = "https://tabungin-api-66486896293.asia-southeast2.run.app/"
+    private const val SAVINGS_BASE_URL = "https://tabungin-66486896293.asia-southeast2.run.app"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
