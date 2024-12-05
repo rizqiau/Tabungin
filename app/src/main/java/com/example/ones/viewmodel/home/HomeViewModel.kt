@@ -13,7 +13,6 @@ import com.example.ones.data.repository.NewsRepository
 import com.example.ones.data.repository.SavingsRepository
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -109,21 +108,6 @@ class HomeViewModel(
         // Menggunakan SimpleDateFormat untuk memformat menjadi string yang lebih readable
         val outputFormat = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
         return outputFormat.format(date)
-    }
-
-    fun getLast7Days(): List<String> {
-        val calendar = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("d", Locale.getDefault()) // Format hanya tanggal (tanpa bulan dan tahun)
-
-        val dates = mutableListOf<String>()
-
-        for (i in 6 downTo 0) {
-            // Mengatur tanggal ke hari ini dikurangi i hari
-            calendar.add(Calendar.DAY_OF_YEAR, -1)
-            dates.add(dateFormat.format(calendar.time))
-        }
-
-        return dates.reversed() // Agar urut dari hari terbaru
     }
 
     // Fetching top headlines (News) from API
