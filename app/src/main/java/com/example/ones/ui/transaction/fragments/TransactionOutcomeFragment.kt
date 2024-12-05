@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.example.ones.data.model.Category
+import com.example.ones.R
+import com.example.ones.databinding.FragmentAddTransactionBinding
 import com.example.ones.databinding.FragmentTransactionOutcomeBinding
-import com.example.ones.ui.transaction.adapter.CategoryAdapter
-import com.example.ones.utils.ViewModelFactory
-import com.example.ones.viewmodel.transaction.TransactionViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -23,52 +22,29 @@ class TransactionOutcomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val calendar = Calendar.getInstance()
 
-    private lateinit var transactionViewModel: TransactionViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTransactionOutcomeBinding.inflate(inflater, container, false)
 
-        transactionViewModel = ViewModelProvider(
-            this,
-            ViewModelFactory.getInstance(requireContext()) // Gunakan ViewModelFactory
-        ).get(TransactionViewModel::class.java)
+        val category = listOf("Shop", "Health", "Food")
+        val categoryInput : AutoCompleteTextView = binding.categoryInput
+        val adapter = ArrayAdapter(requireContext(), R.layout.item_category, category)
 
-        transactionViewModel.outcomeCategories.observe(viewLifecycleOwner) { categories ->
-            setupCategoryDropdown(categories)
+        categoryInput.setAdapter(adapter)
+
+        categoryInput.setOnItemClickListener { adapterView, view, i, l ->
+            val categorySelected = adapterView.getItemAtPosition(i)
+            if (isAdded) { // Pastikan fragment terhubung ke aktivitas
+                Toast.makeText(requireContext(), "Item : $categorySelected", Toast.LENGTH_SHORT).show()
+            }
         }
-
-        // Load kategori ketika fragment dibuat
-        transactionViewModel.loadCategories()
 
         binding.dateInput.setOnClickListener {
             showDatePicker()
         }
-
-        binding.btnSubmit.setOnClickListener {
-            // Ambil data dari form
-            val category = binding.autoCompleteCategory.text.toString()
-            val amount = binding.amountEditText.text.toString().toLongOrNull()
-            val description = binding.descEditText.text.toString()
-
-            if (category.isNotEmpty() && amount != null && description.isNotEmpty()) {
-                transactionViewModel.reduceSavings(category, amount, description)
-            } else {
-                Toast.makeText(context, "Form tidak lengkap", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        transactionViewModel.reduceSavingsResponse.observe(viewLifecycleOwner) { response ->
-            if (response != null) {
-                // Berhasil menambahkan savings
-                findNavController().popBackStack()
-            } else {
-                // Gagal menambahkan savings
-                Toast.makeText(requireContext(), "Failed to add savings", Toast.LENGTH_SHORT).show()
-            }
-        }
+        binding.btnSubmit
 
         return binding.root
     }
@@ -100,17 +76,6 @@ class TransactionOutcomeFragment : Fragment() {
 
         // Tampilkan dialog
         datePickerDialog.show()
-    }
-
-    private fun setupCategoryDropdown(categories: List<Category>) {
-        val categoryAdapter = CategoryAdapter(requireContext(), categories)
-        binding.autoCompleteCategory.setAdapter(categoryAdapter)
-
-        binding.autoCompleteCategory.setOnItemClickListener { parent, view, position, id ->
-            val selectedCategory = parent.getItemAtPosition(position) as Category
-            // Menampilkan nama kategori yang dipilih di AutoCompleteTextView
-            binding.autoCompleteCategory.setText(selectedCategory.name)
-        }
     }
 
     override fun onDestroyView() {
