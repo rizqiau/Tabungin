@@ -18,10 +18,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.ones.ui.settings.fragments.SettingsFragment"
-        android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+        android:id="@+id/goalsFragment"
+        android:name="com.example.ones.ui.goals.fragments.GoalsFragment"
+        android:label="@string/title_goals"
+        tools:layout="@layout/fragment_goals" />
 
     <fragment
         android:id="@+id/profileFragment"

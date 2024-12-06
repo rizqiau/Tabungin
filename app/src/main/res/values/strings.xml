@@ -65,4 +65,6 @@
     <string name="total_outcome">152</string>
     <string name="category_name">Category Name</string>
     <string name="category_icon">Category Icon</string>
+    <string name="title_goals">Goals</string>
+    <string name="add_goals">Add Goals</string>
 </resources>

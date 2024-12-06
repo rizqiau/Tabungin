@@ -16,9 +16,9 @@
         android:title=""/>
 
     <item
-        android:id="@+id/settingsFragment"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_settings" />
+        android:id="@+id/goalsFragment"
+        android:icon="@drawable/ic_goals"
+        android:title="@string/title_goals" />
 
     <item
         android:id="@+id/profileFragment"
