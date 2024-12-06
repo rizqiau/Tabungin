@@ -2,85 +2,90 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/homeFragment">
+    app:startDestination="@id/navigation_home">
 
+    <!-- Home Fragment -->
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/navigation_home"
         android:name="com.example.ones.ui.home.fragments.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
+    <!-- Transaction Fragment -->
     <fragment
-        android:id="@+id/transactionFragment"
+        android:id="@+id/navigation_transaction"
         android:name="com.example.ones.ui.transaction.fragments.TransactionFragment"
         android:label="@string/transaction"
-        tools:layout="@layout/fragment_transaction">
-    </fragment>
+        tools:layout="@layout/fragment_transaction" />
 
-    <fragment
-        android:id="@+id/goalsFragment"
-        android:name="com.example.ones.ui.goals.fragments.GoalsFragment"
-        android:label="@string/title_goals"
-        tools:layout="@layout/fragment_goals" />
+    <!-- Settings Fragment -->
+   
 
+    <!-- History Fragment -->
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/navigation_history"
+        android:name="com.example.ones.ui.history.HistoryFragment"
+        android:label="@string/History"
+        tools:layout="@layout/fragment_history" />
+
+    <!-- Profile Fragment -->
+    <fragment
+        android:id="@+id/navigation_profile"
         android:name="com.example.ones.ui.profile.ProfileFragment"
-        android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile">
-    </fragment>
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile"/>
+    <action
+        android:id="@+id/action_profileFragment_to_editProfileFragment"
+        app:destination="@id/editProfileFragment" />
 
+    <!-- Edit Profile Fragment -->
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.ones.ui.profile.EditProfileFragment"
         tools:layout="@layout/fragment_edit_profile" />
 
+    <!-- Add Transaction Fragment -->
     <fragment
-        android:id="@+id/addTransactionFragment"
+        android:id="@+id/navigation_add_transaction"
         android:name="com.example.ones.ui.transaction.fragments.AddTransactionFragment"
         android:label="@string/add_transaction"
-        tools:layout="@layout/fragment_add_transaction">
+        tools:layout="@layout/fragment_add_transaction" />
+
+    <!-- Login Fragment -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.ones.ui.auth.fragments.LoginFragment"
+        android:label="Login">
+        <!-- Aksi dari Login ke Sign Up -->
         <action
-            android:id="@+id/action_addTransactionFragment_to_transactionOutcomeFragment"
-            app:destination="@id/transactionOutcomeFragment" />
+            android:id="@+id/action_login_to_signupFragment"
+            app:destination="@id/signupFragment" />
+        <!-- Aksi dari Login ke Forgot Password -->
         <action
-            android:id="@+id/action_addTransactionFragment_to_transactionIncomeFragment"
-            app:destination="@id/transactionIncomeFragment" />
-        <action
-            android:id="@+id/action_addTransactionFragment_to_transactionSavingsFragment"
-            app:destination="@id/transactionSavingsFragment" />
-        <action
-            android:id="@+id/action_transactionIncomeFragment_to_transactionFragment"
-            app:destination="@id/transactionFragment" />
+            android:id="@+id/action_login_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
 
+    <!-- Sign Up Fragment -->
     <fragment
-        android:id="@+id/transactionIncomeFragment"
-        android:name="com.example.ones.ui.transaction.fragments.TransactionIncomeFragment"
-        android:label="Transaction Income"
-        tools:layout="@layout/fragment_transaction_income">
+        android:id="@+id/signupFragment"
+        android:name="com.example.ones.ui.auth.fragments.SignupFragment"
+        android:label="Sign Up">
+        <!-- Aksi dari Sign Up ke Login -->
         <action
-            android:id="@+id/action_transactionIncomeFragment_to_transactionFragment"
-            app:destination="@id/transactionFragment" />
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 
+    <!-- Forgot Password Fragment -->
     <fragment
-        android:id="@+id/transactionOutcomeFragment"
-        android:name="com.example.ones.ui.transaction.fragments.TransactionOutcomeFragment"
-        android:label="Transaction Outcome"
-        tools:layout="@layout/fragment_transaction_outcome">
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.ones.ui.auth.fragments.ForgotPasswordFragment"
+        android:label="Forgot Password">
+        <!-- Aksi dari Forgot Password ke Login -->
         <action
-            android:id="@+id/action_transactionOutcomeFragment_to_transactionFragment"
-            app:destination="@id/transactionFragment" />
+            android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/transactionSavingsFragment"
-        android:name="com.example.ones.ui.transaction.fragments.TransactionSavingsFragment"
-        android:label="Transaction Savings"
-        tools:layout="@layout/fragment_transaction_savings">
-        <action
-            android:id="@+id/action_transactionSavingsFragment_to_transactionFragment"
-            app:destination="@id/transactionFragment" />
-    </fragment>
 </navigation>
