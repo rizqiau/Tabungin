@@ -67,4 +67,5 @@
     <string name="category_icon">Category Icon</string>
     <string name="title_goals">Goals</string>
     <string name="add_goals">Add Goals</string>
+    <string name="data">Data</string>
 </resources>

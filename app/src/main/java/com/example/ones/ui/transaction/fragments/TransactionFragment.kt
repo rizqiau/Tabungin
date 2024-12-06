@@ -60,6 +60,8 @@ class TransactionFragment : Fragment() {
             entriesAdapter.submitList(latestEntries)
         }
 
+        transactionViewModel.refreshSavingsData()
+
         transactionViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }

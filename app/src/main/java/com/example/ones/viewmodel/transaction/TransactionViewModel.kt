@@ -111,6 +111,10 @@ class TransactionViewModel (
         }
     }
 
+    fun refreshSavingsData() {
+        fetchSavingsData()  // Panggil ulang fungsi untuk mengambil data terbaru
+    }
+
     private fun parseDateFromTransactionDate(transactionDate: TransactionDate): String {
         // Mengonversi 'seconds' ke dalam milidetik
         val milliseconds = transactionDate.seconds * 1000L + transactionDate.nanoseconds / 1000000L  // nanoseconds diubah ke milidetik
