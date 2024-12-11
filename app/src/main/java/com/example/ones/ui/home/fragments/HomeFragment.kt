@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ones.R
+import com.example.ones.data.model.LatestEntry
 import com.example.ones.databinding.FragmentHomeBinding
 import com.example.ones.ui.customview.CustomMarkerView
 import com.example.ones.ui.home.adapters.LatestEntriesAdapter
@@ -29,6 +30,9 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -67,8 +71,8 @@ class HomeFragment : Fragment() {
                 // Memanggil ViewModel untuk delete transaksi
                 homeViewModel.deleteTransaction(transactionId)
             },
-            onEditClick = { transactionId ->
-                navigateToUpdateTransaction(transactionId)
+            onEditClick = { latestEntry ->
+                navigateToUpdateTransaction(latestEntry)
             }
         )
 
@@ -78,12 +82,31 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun navigateToUpdateTransaction(transactionId: String) {
+    private fun navigateToUpdateTransaction(transaction: LatestEntry) {
+        val date = transaction.date?.let {
+            try {
+                // Parse tanggal dari format awal (misalnya "MMM dd, yyyy HH:mm")
+                val inputFormat = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
+                val parsedDate = inputFormat.parse(it)
+
+                // Format ulang ke "yyyy-MM-dd"
+                val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                outputFormat.format(parsedDate ?: Date())
+            } catch (e: Exception) {
+                Log.e("TransactionFragment", "Error parsing date: ${e.message}")
+                it // Jika gagal parsing, gunakan string aslinya
+            }
+        } ?: ""
+
         val bundle = Bundle().apply {
-            Log.d("HomeFragment", "Navigating with transactionId: $transactionId")
-            putString("transactionId", transactionId)
+            putString("transactionId", transaction.transactionId)
+            putLong("amount", transaction.amount.replace("[^\\d]".toRegex(), "").toLongOrNull() ?: 0L) // Hapus karakter non-numerik
+            putString("category", transaction.category)
+            putString("date", date)
+            putString("description", transaction.title)
         }
         findNavController().navigate(R.id.updateTransactionFragment, bundle)
+        Log.d("HomeFragment", "Navigating with amount: ${transaction.amount}")
     }
 
     private fun showLoading(isLoading: Boolean) {

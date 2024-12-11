@@ -35,23 +35,34 @@ class EditGoalFragment : Fragment() {
             ViewModelFactory.getInstance(requireContext())
         ).get(GoalsViewModel::class.java)
 
+        val goalId = arguments?.getString("goalId")
+        val title = arguments?.getString("title")
+        val targetAmount = arguments?.getLong("targetAmount")
+        val deadline = arguments?.getString("deadline")
+
+        Log.d("EditGoalFragment", "goalId: $goalId, title: $title, targetAmount: $targetAmount, deadline: $deadline")
+
+        // Tampilkan data di input field
+        binding.goalEditText.setText(title)
+        binding.targetAmountEditText.setText(targetAmount?.toString() ?: "")
+        binding.deadlineEditText.setText(deadline)
+
         binding.deadlineEditText.setOnClickListener {
             showDatePicker()
         }
 
         binding.buttonEditGoal.setOnClickListener {
-            val title = binding.goalEditText.text.toString()
-            val targetAmount = binding.targetAmountEditText.text.toString().toLongOrNull()
-            val deadline = binding.deadlineEditText.text.toString()
+            val updatedTitle = binding.goalEditText.text.toString()
+            val updatedTargetAmount = binding.targetAmountEditText.text.toString().toLongOrNull()
+            val updatedDeadline = binding.deadlineEditText.text.toString()
 
-            val goalId = arguments?.getString("goalId")
             if (goalId.isNullOrEmpty()) {
                 Toast.makeText(requireContext(), "Goal ID is missing", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (targetAmount != null) {
-                goalsViewModel.updateGoal(goalId, title, targetAmount, deadline)
+            if (updatedTargetAmount != null) {
+                goalsViewModel.updateGoal(goalId, updatedTitle, updatedTargetAmount, updatedDeadline)
             }
         }
 

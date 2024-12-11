@@ -9,7 +9,7 @@ import com.example.ones.databinding.ItemLatestEntryBinding
 
 class LatestEntriesAdapter(
     private var items: List<LatestEntry>,
-    private val onEditClick: (transactionId: String) -> Unit,
+    private val onEditClick: (LatestEntry) -> Unit,
     private val onDeleteClick: (transactionId: String) -> Unit
     ) : RecyclerView.Adapter<LatestEntriesAdapter.ViewHolder>() {
 
@@ -18,15 +18,18 @@ class LatestEntriesAdapter(
         fun bind(item: LatestEntry) {
             binding.ivIcon.setImageResource(item.iconResId)
             binding.tvTitle.text = item.title
+            binding.tvTitle.setTextColor(item.color)
             binding.tvDate.text = item.date
+            binding.tvDate.setTextColor(item.color)
             binding.tvAmount.text = item.amount
+            binding.tvAmount.setTextColor(item.color)
 
             binding.root.setOnClickListener {
-                showPopupMenu(it, item.transactionId)
+                showPopupMenu(it, item)
             }
         }
 
-        private fun showPopupMenu(view: android.view.View, transactionId: String) {
+        private fun showPopupMenu(view: android.view.View, item: LatestEntry) {
             val popupMenu = PopupMenu(view.context, view)
             val inflater = popupMenu.menuInflater
             inflater.inflate(com.example.ones.R.menu.popup_menu, popupMenu.menu)
@@ -34,17 +37,16 @@ class LatestEntriesAdapter(
 
                 when (menuItem.itemId) {
                     com.example.ones.R.id.option_edit -> {
-                        onEditClick(transactionId)
+                        onEditClick(item) // Mengirimkan objek LatestEntry
                         true
                     }
                     com.example.ones.R.id.option_delete -> {
-                        onDeleteClick(transactionId)
+                        onDeleteClick(item.transactionId)
                         true
                     }
                     else -> false
                 }
             }
-
             // Menampilkan PopupMenu
             popupMenu.show()
         }

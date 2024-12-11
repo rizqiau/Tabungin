@@ -12,11 +12,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ones.R
+import com.example.ones.data.model.LatestEntry
 import com.example.ones.data.model.Result
 import com.example.ones.databinding.FragmentTransactionBinding
 import com.example.ones.ui.home.adapters.LatestEntriesAdapter
 import com.example.ones.utils.ViewModelFactory
 import com.example.ones.viewmodel.transaction.TransactionViewModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class TransactionFragment : Fragment() {
     private var _binding: FragmentTransactionBinding? = null
@@ -46,8 +50,8 @@ class TransactionFragment : Fragment() {
                 // Memanggil ViewModel untuk delete transaksi
                 transactionViewModel.deleteTransaction(transactionId)
             },
-            onEditClick = { transactionId ->
-                navigateToUpdateTransaction(transactionId)
+            onEditClick = { latestEntry ->
+                navigateToUpdateTransaction(latestEntry)
             }
         )
 
@@ -57,11 +61,31 @@ class TransactionFragment : Fragment() {
         }
     }
 
-    private fun navigateToUpdateTransaction(transactionId: String) {
+    private fun navigateToUpdateTransaction(transaction: LatestEntry) {
+        val date = transaction.date?.let {
+            try {
+                // Parse tanggal dari format awal (misalnya "MMM dd, yyyy HH:mm")
+                val inputFormat = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
+                val parsedDate = inputFormat.parse(it)
+
+                // Format ulang ke "yyyy-MM-dd"
+                val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                outputFormat.format(parsedDate ?: Date())
+            } catch (e: Exception) {
+                Log.e("TransactionFragment", "Error parsing date: ${e.message}")
+                it // Jika gagal parsing, gunakan string aslinya
+            }
+        } ?: ""
+
         val bundle = Bundle().apply {
-            putString("transactionId", transactionId)
+            putString("transactionId", transaction.transactionId)
+            putLong("amount", transaction.amount.replace("[^\\d]".toRegex(), "").toLongOrNull() ?: 0L)
+            putString("category", transaction.category)
+            putString("date", date)
+            putString("description", transaction.title)
         }
         findNavController().navigate(R.id.updateTransactionFragment, bundle)
+        Log.d("TransactionFragment", "Navigating with amount: ${transaction.amount}")
     }
 
     private fun showLoading(isLoading: Boolean) {

@@ -77,10 +77,18 @@ class GoalsFragment : Fragment() {
     }
 
     private fun navigateToEditGoal(goalId: String) {
-        val bundle = Bundle().apply {
-            putString("goalId", goalId)
+        val selectedGoal = goalsViewModel.goalsList.value?.find { it.id == goalId }
+        selectedGoal?.let { goal ->
+            val bundle = Bundle().apply {
+                putString("goalId", goal.id)
+                putString("title", goal.title)
+                putLong("targetAmount", goal.targetAmount)
+                putString("deadline", goal.deadline)
+            }
+            findNavController().navigate(R.id.action_goalsFragment_to_editGoalFragment, bundle)
+        } ?: run {
+            Toast.makeText(requireContext(), "Goal not found.", Toast.LENGTH_SHORT).show()
         }
-        findNavController().navigate(R.id.action_goalsFragment_to_editGoalFragment, bundle)
     }
 
     private fun navigateToCashOutGoal(goalId: String) {

@@ -41,7 +41,19 @@ class UpdateTransactionFragment : Fragment() {
         ).get(TransactionViewModel::class.java)
 
         transactionId = arguments?.getString("transactionId")
-        Log.d("UpdateTransactionFragment", "transactionId: $transactionId")
+        val rawAmount = arguments?.getLong("amount", 0L)
+        val category = arguments?.getString("category")
+        val date = arguments?.getString("date")
+        val description = arguments?.getString("description")
+
+        Log.d("UpdateTransactionFragment", "transactionId: $transactionId, amount: $rawAmount, category: $category, date: $date, description: $description")
+
+        // Isi input dengan data dari arguments
+        val amount = rawAmount ?: 0L
+        binding.amountEditText.setText(amount.toString())
+        binding.autoCompleteCategory.setText(category, false) // false untuk tidak trigger listener
+        binding.dateInput.setText(date)
+        binding.descEditText.setText(description)
 
         transactionViewModel.incomeCategories.observe(viewLifecycleOwner) { categories ->
             setupCategoryDropdown(categories)
@@ -119,7 +131,7 @@ class UpdateTransactionFragment : Fragment() {
             return
         }
 
-        val amount = amountText.toLongOrNull()
+        val amount = amountText.replace("[^\\d]".toRegex(), "").toLongOrNull() // Hapus karakter non-numerik
         if (amount == null || amount <= 0) {
             Toast.makeText(requireContext(), "Please enter a valid amount", Toast.LENGTH_SHORT).show()
             return

@@ -1,5 +1,6 @@
 package com.example.ones.viewmodel.transaction
 
+import android.graphics.Color
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -95,7 +96,9 @@ class TransactionViewModel (
                                 title = addition.description,
                                 date = parseDateFromTransactionDate(addition.createdAt),
                                 amount = "+Rp${addition.amount}",
-                                transactionId = addition.id
+                                transactionId = addition.id,
+                                category = addition.category,
+                                color = Color.BLUE
                             )
                         )
                     }
@@ -108,7 +111,9 @@ class TransactionViewModel (
                                 title = reduction.description,
                                 date = parseDateFromTransactionDate(reduction.createdAt),
                                 amount = "-Rp${reduction.amount}",
-                                transactionId = reduction.id
+                                transactionId = reduction.id,
+                                category = reduction.category,
+                                color = Color.RED
                             )
                         )
                     }
@@ -120,7 +125,9 @@ class TransactionViewModel (
                                 title = goalTransaction.description,
                                 date = parseDateFromTransactionDate(goalTransaction.createdAt),
                                 amount = "Rp${goalTransaction.amount}",
-                                transactionId = goalTransaction.id
+                                transactionId = goalTransaction.id,
+                                category = goalTransaction.description,
+                                color = Color.GREEN
                             )
                         )
                     }
