@@ -1,0 +1,154 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.ones.ui.home.fragments.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_updateTransactionFragment"
+            app:destination="@id/updateTransactionFragment">
+            <argument
+                android:name="transactionId"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/transactionFragment"
+        android:name="com.example.ones.ui.transaction.fragments.TransactionFragment"
+        android:label="@string/transaction"
+        tools:layout="@layout/fragment_transaction">
+    </fragment>
+
+    <fragment
+        android:id="@+id/goalsFragment"
+        android:name="com.example.ones.ui.goals.fragments.GoalsFragment"
+        android:label="@string/title_goals"
+        tools:layout="@layout/fragment_goals">
+    <action
+        android:id="@+id/action_goalsFragment_to_addGoalsFragment"
+        app:destination="@id/addGoalsFragment" />
+        <action
+            android:id="@+id/action_goalsFragment_to_updateGoalAmountFragment"
+            app:destination="@id/updateGoalAmountFragment" />
+        <action
+            android:id="@+id/action_goalsFragment_to_editGoalFragment"
+            app:destination="@id/editGoalFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addGoalsFragment"
+        android:name="com.example.ones.ui.goals.fragments.AddGoalsFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_add_goals">
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.ones.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile">
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.ones.ui.settings.fragments.SettingsFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_settings">
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.ones.ui.profile.EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile" />
+
+    <fragment
+        android:id="@+id/addTransactionFragment"
+        android:name="com.example.ones.ui.transaction.fragments.AddTransactionFragment"
+        android:label="@string/add_transaction"
+        tools:layout="@layout/fragment_add_transaction">
+        <action
+            android:id="@+id/action_addTransactionFragment_to_transactionOutcomeFragment"
+            app:destination="@id/transactionOutcomeFragment" />
+        <action
+            android:id="@+id/action_addTransactionFragment_to_transactionIncomeFragment"
+            app:destination="@id/transactionIncomeFragment" />
+        <action
+            android:id="@+id/action_addTransactionFragment_to_transactionSavingsFragment"
+            app:destination="@id/transactionSavingsFragment" />
+        <action
+            android:id="@+id/action_transactionIncomeFragment_to_transactionFragment"
+            app:destination="@id/transactionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transactionIncomeFragment"
+        android:name="com.example.ones.ui.transaction.fragments.TransactionIncomeFragment"
+        android:label="Transaction Income"
+        tools:layout="@layout/fragment_transaction_income">
+        <action
+            android:id="@+id/action_transactionIncomeFragment_to_transactionFragment"
+            app:destination="@id/transactionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transactionOutcomeFragment"
+        android:name="com.example.ones.ui.transaction.fragments.TransactionOutcomeFragment"
+        android:label="Transaction Outcome"
+        tools:layout="@layout/fragment_transaction_outcome">
+        <action
+            android:id="@+id/action_transactionOutcomeFragment_to_transactionFragment"
+            app:destination="@id/transactionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transactionSavingsFragment"
+        android:name="com.example.ones.ui.transaction.fragments.TransactionSavingsFragment"
+        android:label="Transaction Savings"
+        tools:layout="@layout/fragment_transaction_savings">
+        <action
+            android:id="@+id/action_transactionSavingsFragment_to_transactionFragment"
+            app:destination="@id/transactionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.example.ones.ui.userinfo.fragments.UserInfoFragment"
+        android:label="UserInfoFragment"
+        tools:layout="@layout/fragment_user_info">
+        <action
+            android:id="@+id/action_userInfoFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/updateTransactionFragment"
+        android:name="com.example.ones.ui.transaction.fragments.UpdateTransactionFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_update_transaction">
+        <argument
+            android:name="transactionId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/updateGoalAmountFragment"
+        android:name="com.example.ones.ui.goals.fragments.UpdateGoalAmountFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_update_goal_amount">
+        <argument
+            android:name="goalId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/editGoalFragment"
+        android:name="com.example.ones.ui.goals.fragments.EditGoalFragment"
+        android:label="fragment_edit_goal"
+        tools:layout="@layout/fragment_edit_goal" />
+
+</navigation>

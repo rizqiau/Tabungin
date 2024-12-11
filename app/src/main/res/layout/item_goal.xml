@@ -1,0 +1,98 @@
+<!-- item_goal.xml -->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:padding="16dp"
+    tools:context=".ui.goals.adapter.GoalsAdapter">
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/card_constraint" />
+
+        <TextView
+            android:id="@+id/goal_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Goal Title"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/ivLogo"
+            app:layout_constraintStart_toEndOf="@+id/ivLogo"/>
+
+        <TextView
+            android:id="@+id/goal_deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Deadline"
+            android:textSize="14sp"
+            app:layout_constraintTop_toTopOf="@id/goal_title"
+            app:layout_constraintEnd_toEndOf="@id/card_constraint"/>
+
+        <TextView
+            android:id="@+id/goal_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status"
+            android:visibility="gone"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@id/goal_amount"
+            app:layout_constraintStart_toEndOf="@id/ivLogo"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintHorizontal_weight="1"
+            android:progressDrawable="@drawable/progress_bar_custom"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/goal_title"
+            app:layout_constraintStart_toEndOf="@+id/ivLogo"
+            app:layout_constraintEnd_toEndOf="@+id/card_constraint"/>
+
+        <TextView
+            android:id="@+id/goal_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount"
+            android:textSize="14sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@id/progressBar"
+            app:layout_constraintStart_toEndOf="@id/ivLogo"/>
+
+        <TextView
+            android:id="@+id/goal_targetAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Target Amount"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintTop_toTopOf="@id/goal_amount"
+            app:layout_constraintEnd_toEndOf="@id/card_constraint"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
