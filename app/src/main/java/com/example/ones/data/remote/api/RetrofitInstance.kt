@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit
 object RetrofitInstance {
     private const val NEWS_BASE_URL = "https://newsapi.org/"
     private const val SAVINGS_BASE_URL = "https://tabungin-66486896293.asia-southeast2.run.app"
+    private const val PREDICT_BASE_URL = "https://tabunginmodel-66486896293.asia-southeast2.run.app"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
@@ -56,5 +57,9 @@ object RetrofitInstance {
 
     val savingsApiService: ApiService by lazy {
         createRetrofit(SAVINGS_BASE_URL).create(ApiService::class.java)
+    }
+
+    val predictApiService: ApiService by lazy {
+        createRetrofit(PREDICT_BASE_URL).create(ApiService::class.java)
     }
 }

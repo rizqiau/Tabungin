@@ -79,8 +79,6 @@ class GoalsFragment : Fragment() {
     private fun navigateToEditGoal(goalId: String) {
         val bundle = Bundle().apply {
             putString("goalId", goalId)
-            Log.d("GoalsFragment", "Edit clicked for goalId: $goalId")
-            Log.d("GoalsFragment", "Cash Out clicked for goalId: $goalId")
         }
         findNavController().navigate(R.id.action_goalsFragment_to_editGoalFragment, bundle)
     }
@@ -90,8 +88,6 @@ class GoalsFragment : Fragment() {
             putString("goalId", goalId)
         }
         findNavController().navigate(R.id.action_goalsFragment_to_updateGoalAmountFragment, bundle)
-        Log.d("GoalsFragment", "Edit clicked for goalId: $goalId")
-        Log.d("GoalsFragment", "Cash Out clicked for goalId: $goalId")
     }
 
     override fun onDestroyView() {

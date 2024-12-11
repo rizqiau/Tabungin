@@ -11,6 +11,7 @@ import com.example.ones.data.repository.GoalsRepository
 import com.example.ones.data.repository.UserRepository
 import com.example.ones.data.repository.SavingsRepository
 import com.example.ones.data.repository.NewsRepository
+import com.example.ones.data.repository.PredictRepository
 import com.example.ones.data.repository.UserRepositoryInterface
 import com.example.ones.utils.ViewModelFactory
 
@@ -55,13 +56,19 @@ object Injection {
         return GoalsRepository(apiService, userPreferences, savingsPreference)
     }
 
-    // Menyediakan ViewModelFactory dengan dependencies yang tepat
+    fun providePredictRepository(): PredictRepository {
+        val apiService = RetrofitInstance.predictApiService
+        return PredictRepository(apiService)
+    }
+
+    // Update `provideViewModelFactory` untuk menyertakan PredictRepository
     fun provideViewModelFactory(context: Context): ViewModelFactory {
         val userRepositoryInterface = provideUserRepository(context)
         val savingsRepository = provideSavingsRepository(context)
-        val newsRepository = provideNewsRepository() // Menyuntikkan NewsRepository juga
+        val newsRepository = provideNewsRepository()
         val goalsRepository = provideGoalsRepository(context)
-        return ViewModelFactory(userRepositoryInterface, savingsRepository, newsRepository, goalsRepository)
+        val predictRepository = providePredictRepository() // Tambahkan PredictRepository
+        return ViewModelFactory(userRepositoryInterface, savingsRepository, newsRepository, goalsRepository, predictRepository)
     }
 }
 

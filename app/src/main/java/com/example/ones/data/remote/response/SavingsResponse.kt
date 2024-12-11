@@ -11,6 +11,7 @@ data class SavingsData(
     val amount: Long,
     val totalAdditions: Long,
     val totalReductions: Long,
+    val totalGoals: Long,
     val additions: List<Transaction>,
     val reductions: List<Transaction>,
     val goals: List<Goals>

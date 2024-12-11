@@ -93,7 +93,7 @@ class EditGoalFragment : Fragment() {
                 calendar.set(selectedYear, selectedMonth, selectedDay)
 
                 // Format tanggal
-                val format = SimpleDateFormat("yyyy-mm-dd", Locale.getDefault())
+                val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 val selectedDate = format.format(calendar.time)
 
                 // Tampilkan tanggal di dateInput

@@ -145,4 +145,13 @@ class SavingsRepository(
 
         return apiService.addGoalAmount(userId, savingId, goalId, request, "Bearer $token")
     }
+
+    suspend fun getTotalAdditionsAndReductions(): Pair<Long, Long> {
+        val savingsData = getSavingsData() // Panggil data dari fungsi utama
+        val totalAdditions = savingsData.data.totalAdditions
+        val totalReductions = savingsData.data.totalReductions
+
+        Log.d("SavingsRepository", "Total Additions: $totalAdditions, Total Reductions: $totalReductions")
+        return Pair(totalAdditions, totalReductions)
+    }
 }

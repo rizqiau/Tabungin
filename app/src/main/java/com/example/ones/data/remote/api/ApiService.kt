@@ -4,6 +4,7 @@ import com.example.ones.data.remote.request.AddGoalAmountRequest
 import com.example.ones.data.remote.request.AddGoalsRequest
 import com.example.ones.data.remote.request.AddSavingsRequest
 import com.example.ones.data.remote.request.LoginRequest
+import com.example.ones.data.remote.request.PredictRequest
 import com.example.ones.data.remote.request.ReduceSavingsRequest
 import com.example.ones.data.remote.request.RegisterRequest
 import com.example.ones.data.remote.request.UpdateGoalAmountRequest
@@ -12,6 +13,7 @@ import com.example.ones.data.remote.request.UpdateSavingsRequest
 import com.example.ones.data.remote.response.AddGoalsResponse
 import com.example.ones.data.remote.response.LoginResponse
 import com.example.ones.data.remote.response.NewsResponse
+import com.example.ones.data.remote.response.PredictResponse
 import com.example.ones.data.remote.response.RegisterResponse
 import com.example.ones.data.remote.response.SavingsResponse
 import retrofit2.http.Body
@@ -108,4 +110,9 @@ interface ApiService {
         @Body request: UpdateGoalRequest,
         @Header("Authorization") token: String
     ): SavingsResponse
+
+    @POST("predict")
+    suspend fun predict(
+        @Body request: PredictRequest,
+    ): PredictResponse
 }

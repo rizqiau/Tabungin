@@ -13,7 +13,10 @@ import com.example.ones.data.remote.response.TransactionDate
 import com.example.ones.data.repository.NewsRepository
 import com.example.ones.data.repository.SavingsRepository
 import com.example.ones.data.model.Result
+import com.example.ones.data.remote.request.PredictRequest
+import com.example.ones.data.remote.response.PredictResponse
 import com.example.ones.data.remote.response.SavingsResponse
+import com.example.ones.data.repository.PredictRepository
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.Instant
@@ -24,7 +27,8 @@ import java.util.Locale
 
 class HomeViewModel(
     private val savingsRepository: SavingsRepository,
-    private val newsRepository: NewsRepository
+    private val newsRepository: NewsRepository,
+    private val predictRepository: PredictRepository
 ) : ViewModel() {
 
     // LiveData untuk LatestEntry (Tabungan)
@@ -42,6 +46,10 @@ class HomeViewModel(
     private val _reductionsLast7Days = MutableLiveData<List<Pair<String, Long>>>()
     val reductionsLast7Days: LiveData<List<Pair<String, Long>>> get() = _reductionsLast7Days
 
+    // LiveData untuk hasil prediksi
+    private val _predictResult = MutableLiveData<Result<PredictResponse>>()
+    val predictResult: LiveData<Result<PredictResponse>> get() = _predictResult
+
     // LiveData untuk Articles (Berita)
     private val _articles = MutableLiveData<List<Article>>()
     val articles: LiveData<List<Article>> get() = _articles
@@ -55,6 +63,7 @@ class HomeViewModel(
     init {
         fetchSavingsData() // Fetch data tabungan
         fetchTopHeadlines("us", "business", "e4732fddfae14b91af7072a3566a4c0b") // Fetch data berita
+        predictSavings()
     }
 
     // Fetching savings data from API
@@ -199,6 +208,42 @@ class HomeViewModel(
                 _error.value = null
             } catch (e: Exception) {
                 _error.value = e.message
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun predictSavings() {
+        _isLoading.value = true
+        viewModelScope.launch {
+            try {
+                // Ambil data tabungan
+                val savingsData = savingsRepository.getSavingsData()
+                val request = PredictRequest(
+                    Pendapatan_Bulanan = savingsData.data.totalAdditions,
+                    Umur = 0, // Set nilai default
+                    Jumlah_Tanggungan = 0, // Set nilai default
+                    Sewa_Bulanan = 0, // Set nilai default
+                    Pembayaran_Pinjaman_Bulanan = 0, // Set nilai default
+                    Biaya_Asuransi_Bulanan = 0, // Set nilai default
+                    Biaya_Bahan_Makanan_Bulanan = 0, // Set nilai default
+                    Biaya_Transportasi_Bulanan = 0, // Set nilai default
+                    Biaya_Makan_Di_Luar_Bulanan = 0, // Set nilai default
+                    Biaya_Hiburan_Bulanan = 0, // Set nilai default
+                    Biaya_Utilitas_Bulanan = 0, // Set nilai default
+                    Biaya_Perawatan_Kesehatan_Bulanan = 0, // Set nilai default
+                    Biaya_Pendidikan_Bulanan = 0, // Set nilai default
+                    Biaya_Lain_Lain_Bulanan = savingsData.data.totalReductions // Gunakan total pengeluaran
+                )
+
+                Log.d("PredictRequest", "Request: $request")
+                val response = predictRepository.predictSavings(request)
+                _predictResult.value = Result.Success(response)
+                Log.d("PredictResponse", "Response: $response")
+            } catch (e: Exception) {
+                _predictResult.value = Result.Error(e.message ?: "Unknown error")
+                Log.e("PredictViewModel", "Error: ${e.message}")
             } finally {
                 _isLoading.value = false
             }
