@@ -13,6 +13,7 @@ import com.example.ones.viewmodel.auth.AuthViewModel
 import com.example.ones.viewmodel.goals.GoalsViewModel
 import com.example.ones.viewmodel.home.HomeViewModel
 import com.example.ones.viewmodel.predict.PredictViewModel
+import com.example.ones.viewmodel.report.MonthlyReportViewModel
 import com.example.ones.viewmodel.transaction.TransactionViewModel
 
 class ViewModelFactory(
@@ -40,6 +41,9 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(PredictViewModel::class.java) -> { // Tambahkan PredictViewModel
                 PredictViewModel(predictRepository, savingsRepository) as T
+            }
+            modelClass.isAssignableFrom(MonthlyReportViewModel::class.java) -> { // Tambahkan PredictViewModel
+                MonthlyReportViewModel(savingsRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

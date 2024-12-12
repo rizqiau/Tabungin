@@ -1,6 +1,8 @@
 package com.example.ones.data.repository
 
 import android.util.Log
+import com.example.ones.data.model.MonthlyReportData
+import com.example.ones.data.model.TransactionItem
 import com.example.ones.data.preferences.SavingsPreference
 import com.example.ones.data.preferences.UserPreference
 import com.example.ones.data.remote.api.ApiService
@@ -11,6 +13,8 @@ import com.example.ones.data.remote.request.UpdateSavingsRequest
 import com.example.ones.data.remote.response.SavingsResponse
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
+import java.time.Instant
+import java.time.ZoneId
 
 class SavingsRepository(
     private val apiService: ApiService,
@@ -146,12 +150,97 @@ class SavingsRepository(
         return apiService.addGoalAmount(userId, savingId, goalId, request, "Bearer $token")
     }
 
-    suspend fun getTotalAdditionsAndReductions(): Pair<Long, Long> {
-        val savingsData = getSavingsData() // Panggil data dari fungsi utama
+    suspend fun getTotalAdditionsAndReductions(): Triple<Long, Long, Long> {
+        val savingsData = getSavingsData() // Ambil data savings dari API
+
+        // Total pemasukan (additions)
         val totalAdditions = savingsData.data.totalAdditions
+
+        // Total pengeluaran (reductions)
         val totalReductions = savingsData.data.totalReductions
 
-        Log.d("SavingsRepository", "Total Additions: $totalAdditions, Total Reductions: $totalReductions")
-        return Pair(totalAdditions, totalReductions)
+        // Total tabungan (goals)
+        val totalGoals = savingsData.data.totalGoals
+
+        // Log untuk debugging
+        Log.d("SavingsRepository", "Total Additions: $totalAdditions, Total Reductions: $totalReductions, Total Goals: $totalGoals")
+
+        return Triple(totalAdditions, totalReductions, totalGoals)
+    }
+
+    suspend fun getMonthlyTransactions(month: Int, year: Int): MonthlyReportData {
+        val savingsData = getSavingsData() // Ambil data savings dari API
+
+        // Filter pemasukan (additions) berdasarkan bulan dan tahun
+        val monthlyAdditions = savingsData.data.additions.filter {
+            val transactionDate = Instant.ofEpochSecond(it.createdAt.seconds)
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate()
+            transactionDate.month.value == month && transactionDate.year == year
+        }
+
+        // Filter pengeluaran (reductions) berdasarkan bulan dan tahun
+        val monthlyReductions = savingsData.data.reductions.filter {
+            val transactionDate = Instant.ofEpochSecond(it.createdAt.seconds)
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate()
+            transactionDate.month.value == month && transactionDate.year == year
+        }
+
+        // Total pemasukan dan pengeluaran untuk bulan tersebut
+        val totalIncome = monthlyAdditions.sumOf { it.amount }
+        val totalOutcome = monthlyReductions.sumOf { it.amount }
+
+        // Total tabungan diambil langsung dari `amount` di savingsData
+        val totalSavings = savingsData.data.amount
+
+        // Data untuk grafik batang (Bar Chart)
+        val barChartData = listOf(
+            Pair("Income", totalIncome.toFloat()),
+            Pair("Outcome", totalOutcome.toFloat()),
+            Pair("Savings", totalSavings.toFloat())
+        )
+
+        // Data untuk grafik lingkaran (Pie Chart)
+        val pieChartData = listOf(
+            Pair("Income", totalIncome.toFloat()),
+            Pair("Outcome", totalOutcome.toFloat()),
+            Pair("Savings", totalSavings.toFloat())
+        )
+
+        // Gabungan daftar transaksi untuk RecyclerView
+        val transactions = (monthlyAdditions.map {
+            TransactionItem(
+                id = it.id,
+                category = it.category,
+                amount = it.amount,
+                description = it.description,
+                date = Instant.ofEpochSecond(it.createdAt.seconds)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .toString()
+            )
+        } + monthlyReductions.map {
+            TransactionItem(
+                id = it.id,
+                category = it.category,
+                amount = -it.amount, // Pengeluaran negatif
+                description = it.description,
+                date = Instant.ofEpochSecond(it.createdAt.seconds)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .toString()
+            )
+        }).sortedByDescending { it.date }
+
+        // Kembalikan data laporan bulanan
+        return MonthlyReportData(
+            totalIncome = totalIncome,
+            totalOutcome = totalOutcome,
+            savings = totalSavings,
+            barChartData = barChartData,
+            pieChartData = pieChartData,
+            transactions = transactions
+        )
     }
 }
