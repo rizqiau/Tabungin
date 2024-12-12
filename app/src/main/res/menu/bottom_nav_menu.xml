@@ -21,7 +21,7 @@
         android:title="@string/title_goals" />
 
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/monthlyReportFragment"
         android:icon="@drawable/ic_account_circle_black_24dp"
-        android:title="@string/title_profile" />
+        android:title="@string/report" />
 </menu>

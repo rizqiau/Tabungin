@@ -150,5 +150,10 @@
         android:name="com.example.ones.ui.goals.fragments.EditGoalFragment"
         android:label="fragment_edit_goal"
         tools:layout="@layout/fragment_edit_goal" />
+    <fragment
+        android:id="@+id/monthlyReportFragment"
+        android:name="com.example.ones.ui.report.fragments.MonthlyReportFragment"
+        android:label="fragment_monthly_report"
+        tools:layout="@layout/fragment_monthly_report" />
 
 </navigation>

@@ -77,5 +77,6 @@
     <string name="signup_error">Signup Error!</string>
     <string name="age">Age</string>
     <string name="edit_goals">Edit Goals</string>
+    <string name="report">Report</string>
 
 </resources>

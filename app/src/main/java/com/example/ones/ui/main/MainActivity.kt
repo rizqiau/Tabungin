@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.transactionFragment,
                 R.id.goalsFragment,
                 R.id.settingsFragment,
+                R.id.monthlyReportFragment,
                 R.id.profileFragment -> {
                     binding.bottomAppbar.visibility = View.VISIBLE
                     binding.fabAdd.visibility = View.VISIBLE
