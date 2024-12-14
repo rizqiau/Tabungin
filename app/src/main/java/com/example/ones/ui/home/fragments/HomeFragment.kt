@@ -55,6 +55,10 @@ class HomeFragment : Fragment() {
 
         barChart = binding.barChart
 
+        binding.ivProfilePic.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+        }
+
         setupLatestEntries()
         setupNewsRecyclerView()
 

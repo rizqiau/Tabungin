@@ -18,6 +18,7 @@ import com.example.ones.utils.ViewModelFactory
 import com.example.ones.viewmodel.report.MonthlyReportViewModel
 import com.example.ones.data.model.Result
 import com.example.ones.ui.customview.CustomMarkerView
+import com.example.ones.viewmodel.predict.PredictViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -36,6 +37,7 @@ class MonthlyReportFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var monthlyReportViewModel: MonthlyReportViewModel
+    private lateinit var predictViewModel: PredictViewModel
     private lateinit var transactionAdapter: TransactionAdapter
 
     override fun onCreateView(
@@ -46,10 +48,13 @@ class MonthlyReportFragment : Fragment() {
 
         val factory = ViewModelFactory.getInstance(requireContext())
         monthlyReportViewModel = ViewModelProvider(this, factory).get(MonthlyReportViewModel::class.java)
+        predictViewModel = ViewModelProvider(this, factory).get(PredictViewModel::class.java)
 
         observeViewModel()
         setupListeners()
         setupRecyclerView()
+
+        predictViewModel.predictSavings()
 
         return binding.root
     }
@@ -74,6 +79,24 @@ class MonthlyReportFragment : Fragment() {
                 }
                 is Result.Loading -> {
                     // Show loading if needed
+                }
+            }
+        }
+
+        // Observasi predictResult untuk menampilkan nilai rekomendasi tabungan
+        predictViewModel.predictResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Success -> {
+                    val recommendation = result.data.Rekomendasi_Tabungan_Bulanan_Anda
+                    val alert = result.data.Alert
+                    binding.nilaiRekomendasi.text = recommendation // Tampilkan rekomendasi di TextView
+                    binding.alert.text = alert
+                }
+                is Result.Error -> {
+                    Toast.makeText(requireContext(), "Error: ${result.error}", Toast.LENGTH_SHORT).show()
+                }
+                is Result.Loading -> {
+                    // Tampilkan loading jika perlu
                 }
             }
         }

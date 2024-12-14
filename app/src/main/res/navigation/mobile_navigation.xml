@@ -16,6 +16,9 @@
                 android:name="transactionId"
                 app:argType="string" />
         </action>
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
@@ -60,6 +63,12 @@
         android:name="com.example.ones.ui.settings.fragments.SettingsFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
     </fragment>
 
     <fragment
@@ -155,5 +164,9 @@
         android:name="com.example.ones.ui.report.fragments.MonthlyReportFragment"
         android:label="fragment_monthly_report"
         tools:layout="@layout/fragment_monthly_report" />
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.example.ones.ui.profile.LanguageFragment"
+        android:label="LanguageFragment" />
 
 </navigation>

@@ -18,11 +18,8 @@ class LatestEntriesAdapter(
         fun bind(item: LatestEntry) {
             binding.ivIcon.setImageResource(item.iconResId)
             binding.tvTitle.text = item.title
-            binding.tvTitle.setTextColor(item.color)
             binding.tvDate.text = item.date
-            binding.tvDate.setTextColor(item.color)
             binding.tvAmount.text = item.amount
-            binding.tvAmount.setTextColor(item.color)
 
             binding.root.setOnClickListener {
                 showPopupMenu(it, item)

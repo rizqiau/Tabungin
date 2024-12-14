@@ -32,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/transaction_title"
+            android:textColor="?android:textColor"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -41,8 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/transaction_date"
-            android:textSize="12sp"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="?android:textColor"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <!-- Right Details (Amount and Payment Info) -->
@@ -57,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/transaction_amount"
+            android:textColor="?android:textColor"
             android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>

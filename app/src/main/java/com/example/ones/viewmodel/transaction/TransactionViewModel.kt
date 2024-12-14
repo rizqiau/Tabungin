@@ -92,13 +92,12 @@ class TransactionViewModel (
                     response.data.additions.forEach { addition ->
                         allTransactionData.add(
                             LatestEntry(
-                                iconResId = R.drawable.ic_shopping,
+                                iconResId = R.drawable.coins,
                                 title = addition.description,
                                 date = parseDateFromTransactionDate(addition.createdAt),
                                 amount = "+Rp${addition.amount}",
                                 transactionId = addition.id,
                                 category = addition.category,
-                                color = Color.BLUE
                             )
                         )
                     }
@@ -107,13 +106,12 @@ class TransactionViewModel (
                     response.data.reductions.forEach { reduction ->
                         allTransactionData.add(
                             LatestEntry(
-                                iconResId = R.drawable.ic_shopping,
+                                iconResId = R.drawable.loss,
                                 title = reduction.description,
                                 date = parseDateFromTransactionDate(reduction.createdAt),
                                 amount = "-Rp${reduction.amount}",
                                 transactionId = reduction.id,
                                 category = reduction.category,
-                                color = Color.RED
                             )
                         )
                     }
@@ -121,13 +119,12 @@ class TransactionViewModel (
                     response.data.getGoalsAsTransactions().forEach { goalTransaction ->
                         allTransactionData.add(
                             LatestEntry(
-                                iconResId = R.drawable.ic_note,
+                                iconResId = R.drawable.money,
                                 title = goalTransaction.description,
                                 date = parseDateFromTransactionDate(goalTransaction.createdAt),
                                 amount = "Rp${goalTransaction.amount}",
                                 transactionId = goalTransaction.id,
                                 category = goalTransaction.description,
-                                color = Color.GREEN
                             )
                         )
                     }

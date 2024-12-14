@@ -79,44 +79,44 @@ class HomeViewModel(
 
                     // Menggabungkan transaksi dari additions
                     response.data.additions.forEach { addition ->
+                        val updatedAt = addition.updatedAt ?: TransactionDate(0, 0)
                         allTransactionData.add(
                             LatestEntry(
-                                iconResId = R.drawable.ic_shopping,
+                                iconResId = R.drawable.coins,
                                 title = addition.description,
                                 date = parseDateFromTransactionDate(addition.createdAt),
                                 amount = "+Rp${addition.amount}",
                                 transactionId = addition.id,
                                 category = addition.category,
-                                color = Color.BLUE
                             )
                         )
                     }
 
                     // Menggabungkan transaksi dari reductions
                     response.data.reductions.forEach { reduction ->
+                        val updatedAt = reduction.updatedAt ?: TransactionDate(0, 0)
                         allTransactionData.add(
                             LatestEntry(
-                                iconResId = R.drawable.ic_shopping,
+                                iconResId = R.drawable.loss,
                                 title = reduction.description,
                                 date = parseDateFromTransactionDate(reduction.createdAt),
                                 amount = "-Rp${reduction.amount}",
                                 transactionId = reduction.id,
                                 category = reduction.category,
-                                color = Color.RED
                             )
                         )
                     }
 
                     response.data.getGoalsAsTransactions().forEach { goalTransaction ->
+                        val updatedAt = goalTransaction.updatedAt ?: TransactionDate(0, 0)
                         allTransactionData.add(
                             LatestEntry(
-                                iconResId = R.drawable.ic_note,
+                                iconResId = R.drawable.money,
                                 title = goalTransaction.description,
                                 date = parseDateFromTransactionDate(goalTransaction.createdAt),
                                 amount = "Rp${goalTransaction.amount}",
                                 transactionId = goalTransaction.id,
                                 category = goalTransaction.description,
-                                color = Color.GREEN
                             )
                         )
                     }
@@ -140,7 +140,7 @@ class HomeViewModel(
                 }
             } catch (e: Exception) {
                 _error.value = e.message // Menampilkan pesan error ke UI
-                Log.e("fetchSavingsData", "error")
+                Log.e("fetchSavingsData", "error: ${e.message}")
             } finally {
                 _isLoading.value = false
             }

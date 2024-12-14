@@ -4,47 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".ui.settings.fragments.SettingsFragment">
 
+    <ImageButton
+        android:id="@+id/ivBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="Icon Back"
+        android:src="@drawable/ic_back"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/title_settings"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivBack"
+        app:layout_constraintTop_toTopOf="@id/ivBack" />
+
+    <!-- CardProfile moved to the top -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_edit_profile"
+        android:id="@+id/card_profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/ivBack"
+        android:layout_marginTop="24dp"
+        android:padding="8dp">
 
         <TextView
-            android:id="@+id/tv_edit_profile"
+            android:id="@+id/tv_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="@string/tema"
-            android:textSize="18sp"
+            android:text="@string/card_profile"
             android:textColor="@android:color/black"
+            android:textSize="18sp"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
-            app:drawableStartCompat="@drawable/baseline_mode_night_24" />
+            app:drawableStartCompat="@drawable/ic_account_circle_black_24dp" />
     </androidx.cardview.widget.CardView>
 
-    <!-- Second CardView -->
+    <!-- Second CardView (Tema) -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_tema"
+        android:id="@+id/card_language"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_edit_profile"
+        app:layout_constraintTop_toBottomOf="@id/card_profile"
         android:layout_marginTop="16dp"
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/tv_tema"
+            android:id="@+id/tv_language_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
@@ -55,23 +80,82 @@
             android:gravity="center_vertical"
             app:drawableStartCompat="@drawable/baseline_abc_24" />
     </androidx.cardview.widget.CardView>
+    <!-- Fourth CardView (Edit Profile) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_tema"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_language">
+
+        <TextView
+            android:id="@+id/tv_dark_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/dark_mode"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            app:drawableStartCompat="@drawable/baseline_mode_night_24" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_dark_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"/>
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_language"
+        android:id="@+id/card_notification"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_tema">
+
+        <TextView
+            android:id="@+id/tv_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/notification"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            app:drawableStartCompat="@drawable/baseline_notifications_24" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Third CardView (Language) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_help"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_tema"
+        app:layout_constraintTop_toBottomOf="@id/card_notification"
         android:layout_marginTop="16dp"
         android:padding="8dp">
 
-
-
         <TextView
-            android:id="@+id/tv_language"
+            android:id="@+id/tv_help"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
@@ -82,5 +166,16 @@
             android:gravity="center_vertical"
             app:drawableStartCompat="@drawable/baseline_help_24" />
     </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/button_gradient"
+        android:text="@string/logout"
+        app:layout_constraintTop_toBottomOf="@id/card_help"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

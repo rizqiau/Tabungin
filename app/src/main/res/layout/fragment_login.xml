@@ -39,6 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:textColor="?android:textColor"
         android:text="@string/dont_have_an_account"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleTextView" />
@@ -50,6 +51,7 @@
         android:layout_marginStart="8dp"
         android:text="@string/register_here"
         android:textStyle="bold"
+        android:textColor="?android:textColor"
         app:layout_constraintStart_toEndOf="@id/tvDontHaveAnAccount"
         app:layout_constraintTop_toTopOf="@+id/tvDontHaveAnAccount" />
 
@@ -70,6 +72,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/email"
+            android:textColor="?android:textColor"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,6 +94,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/password"
             android:ems="10"
+            android:textColor="?android:textColor"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 

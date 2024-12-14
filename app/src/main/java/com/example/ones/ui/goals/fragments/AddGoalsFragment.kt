@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.ones.databinding.FragmentAddGoalsBinding
 import com.example.ones.utils.ViewModelFactory
 import com.example.ones.viewmodel.goals.GoalsViewModel
@@ -46,6 +47,7 @@ class AddGoalsFragment : Fragment() {
             response?.let {
                 // Tampilkan data goal yang berhasil ditambahkan
                 Log.d("Add Goals Response", "$response")
+                findNavController().popBackStack()
             }
         }
 

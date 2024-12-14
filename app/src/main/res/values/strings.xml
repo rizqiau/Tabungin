@@ -46,7 +46,7 @@
     <string name="register_here">Register Here</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="tema">Tema</string>
-    <string name="language">Bahasa</string>
+    <string name="language">Language</string>
     <string name="images">user</string>
     <string name="images_name">username</string>
     <string name="notification">Notification</string>
@@ -78,5 +78,17 @@
     <string name="age">Age</string>
     <string name="edit_goals">Edit Goals</string>
     <string name="report">Report</string>
-
+    <string name="monthly_report">Monthly Report</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="card_profile">Profile</string>
+    <string name="my_account">My Account</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="saving_recommendation">Saving Recommendation</string>
+    <string name="language_settings">Language Settings</string>
+    <string name="cashout">Cashout</string>
+    <string name="confirm_language_change">Confirm Language Change</string>
+    <string name="confirm_language_english">Are you sure you want to change the language to English?</string>
+    <string name="confirm_language_indonesian">Are you sure you want to change the language to Indonesian?</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
 </resources>

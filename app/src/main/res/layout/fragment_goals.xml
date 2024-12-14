@@ -15,6 +15,7 @@
         android:text="@string/title_goals"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="?android:textColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -29,7 +29,7 @@ data class Transaction(
     val description: String,
     val date: TransactionDate,
     val createdAt: TransactionDate,
-    val updatedAt: TransactionDate,
+    val updatedAt: TransactionDate?
 )
 
 data class TransactionDate(

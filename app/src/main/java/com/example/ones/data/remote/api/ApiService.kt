@@ -111,6 +111,14 @@ interface ApiService {
         @Header("Authorization") token: String
     ): SavingsResponse
 
+    @DELETE("goals/{userId}/{savingId}/{goalId}")
+    suspend fun deleteGoal(
+        @Path("userId") userId: String,
+        @Path("savingId") savingId: String,
+        @Path("goalId") goalId: String,
+        @Header("Authorization") token: String
+    )
+
     @POST("predict")
     suspend fun predict(
         @Body request: PredictRequest,

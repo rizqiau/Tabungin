@@ -26,6 +26,7 @@
         android:text="@string/edit_goals"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="?android:textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ivBack"
         app:layout_constraintTop_toTopOf="@id/ivBack" />
@@ -37,6 +38,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/title_goals"
         android:textStyle="bold"
+        android:textColor="?android:textColor"
         app:layout_constraintTop_toBottomOf="@id/tvHeader"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -54,6 +56,7 @@
             android:id="@+id/goalEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="?android:textColor"
             android:hint="@string/title_goals" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,6 +66,7 @@
         android:layout_height="wrap_content"
         android:text="@string/amount"
         android:textStyle="bold"
+        android:textColor="?android:textColor"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@+id/goalTextInputLayout"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -81,6 +85,7 @@
             android:id="@+id/targetAmountEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="?android:textColor"
             android:hint="@string/amount" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,6 +96,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/deadline"
         android:textStyle="bold"
+        android:textColor="?android:textColor"
         app:layout_constraintTop_toBottomOf="@id/amountTextInputLayout"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -109,6 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/deadline"
+            android:textColor="?android:textColor"
             android:inputType="none"
             android:focusable="false"
             android:drawableEnd="@drawable/ic_calendar" />
@@ -118,11 +125,13 @@
         android:id="@+id/buttonEditGoal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/button_gradient"
         android:text="@string/add"
-        app:layout_constraintTop_toBottomOf="@id/dateInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/dateInputLayout" />
 
     <ProgressBar
         android:id="@+id/progressBar"
